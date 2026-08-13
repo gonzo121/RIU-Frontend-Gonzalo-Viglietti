@@ -1,0 +1,19 @@
+services:
+  hero-app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.web
+
+    container_name: hero-app
+
+    ports:
+      - "4200:4200"
+
+    volumes:
+      - .:/app
+      - hero_node_modules:/app/node_modules
+
+    command: pnpm exec ng serve --host 0.0.0.0
+
+volumes:
+  hero_node_modules:
