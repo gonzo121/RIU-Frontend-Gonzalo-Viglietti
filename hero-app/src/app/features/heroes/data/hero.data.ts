@@ -1,4 +1,5 @@
 import { Hero } from '../models/hero.model';
+import { SUPER_POWERS } from './powers.data';
 
 export const INITIAL_HEROES: Hero[] = [
     {
@@ -7,7 +8,7 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'Clark Kent',
         franchise: 'DC Comics',
         description: 'The Man of Steel',
-        superPower: 'Super strength and flight',
+        superPowers: [SUPER_POWERS.SUPER_SPEED, SUPER_POWERS.SUPER_STRENGTH, SUPER_POWERS.SUPER_SPEED],
         age: 35,
         wearCape: true,
         fromEarth: false
@@ -18,7 +19,7 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'Bruce Wayne',
         franchise: 'DC Comics',
         description: 'The Dark Knight',
-        superPower: 'Genius intellect and martial arts skills',
+        superPowers: [SUPER_POWERS.GENIUS_INTELLECT, SUPER_POWERS.EXPERT_MARTIAL_ARTIST],
         age: 40,
         wearCape: true,
         fromEarth: true
@@ -30,7 +31,7 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'Diana Prince',
         franchise: 'DC Comics',
         description: 'Amazonian warrior princess',
-        superPower: 'Super strength and agility',
+        superPowers: [SUPER_POWERS.SUPER_STRENGTH, SUPER_POWERS.SUPER_AGILITY],
         age: 3000,
         wearCape: false,
         fromEarth: false
@@ -41,7 +42,7 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'Peter Parker',
         franchise: 'Marvel Comics',
         description: 'Friendly neighborhood superhero',
-        superPower: 'Wall-crawling and spider-sense',
+        superPowers: [SUPER_POWERS.WALL_CRAWLING, SUPER_POWERS.SPIDER_SENSE],
         age: 18,
         wearCape: false,
         fromEarth: true
@@ -52,7 +53,7 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'Tony Stark',
         franchise: 'Marvel Comics',
         description: 'Genius billionaire playboy philanthropist',
-        superPower: 'Powered armor suit',
+        superPowers: [SUPER_POWERS.POWERED_ARMOR],
         age: 45,
         wearCape: false,
         fromEarth: true
@@ -63,7 +64,7 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'Steve Rogers',
         franchise: 'Marvel Comics',
         description: 'Super soldier and symbol of freedom',
-        superPower: 'Enhanced strength and agility',
+        superPowers: [SUPER_POWERS.ENHANCED_STRENGTH, SUPER_POWERS.ENHANCED_AGILITY],
         age: 100,
         wearCape: false,
         fromEarth: true
@@ -74,7 +75,7 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'Thor Odinson',
         franchise: 'Marvel Comics',
         description: 'God of Thunder',
-        superPower: 'Control over lightning and weather',
+        superPowers: [SUPER_POWERS.CONTROL_LIGHTNING, SUPER_POWERS.CONTROL_WEATHER],
         age: 1500,
         wearCape: true,
         fromEarth: false
@@ -85,7 +86,7 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'T\'Challa',
         franchise: 'Marvel Comics',
         description: 'King of Wakanda and superhero',
-        superPower: 'Enhanced strength and agility, Vibranium suit',
+        superPowers: [SUPER_POWERS.ENHANCED_STRENGTH, SUPER_POWERS.ENHANCED_AGILITY, SUPER_POWERS.VIBRANIUM_SUIT],
         age: 30,
         wearCape: false,
         fromEarth: true
@@ -96,7 +97,7 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'Bruce Banner',
         franchise: 'Marvel Comics',
         description: 'Green-skinned behemoth with incredible strength',
-        superPower: 'Superhuman strength and durability',
+        superPowers: [SUPER_POWERS.SUPER_STRENGTH, SUPER_POWERS.SUPERHUMAN_DURABILITY],
         age: 40,
         wearCape: false,
         fromEarth: true
@@ -107,7 +108,7 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'Barry Allen',
         franchise: 'DC Comics',
         description: 'Fastest man alive',
-        superPower: 'Super speed and time manipulation',
+        superPowers: [SUPER_POWERS.SUPER_SPEED, SUPER_POWERS.TIME_MANIPULATION],
         age: 28,
         wearCape: false,
         fromEarth: true
@@ -118,7 +119,7 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'Hal Jordan',
         franchise: 'DC Comics',
         description: 'Intergalactic peacekeeper with a power ring',
-        superPower: 'Power ring that can create constructs',
+        superPowers: [SUPER_POWERS.POWER_RING],
         age: 32,
         wearCape: false,
         fromEarth: true
@@ -129,7 +130,7 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'Arthur Curry',
         franchise: 'DC Comics',
         description: 'King of Atlantis and protector of the seas',
-        superPower: 'Ability to communicate with marine life and super strength',
+        superPowers: [SUPER_POWERS.COMMUNICATE_WITH_MARINE_LIFE, SUPER_POWERS.SUPER_STRENGTH],
         age: 35,
         wearCape: false,
         fromEarth: true
@@ -140,7 +141,7 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'Stephen Strange',
         franchise: 'Marvel Comics',
         description: 'Master of the mystic arts and Sorcerer Supreme',
-        superPower: 'Magic and manipulation of time and space',
+        superPowers: [SUPER_POWERS.MAGIC, SUPER_POWERS.TIME_MANIPULATION],
         age: 45,
         wearCape: true,
         fromEarth: true
@@ -151,7 +152,7 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'Natasha Romanoff',
         franchise: 'Marvel Comics',
         description: 'Highly skilled spy and assassin',
-        superPower: 'Expert martial artist and marksman',
+        superPowers: [SUPER_POWERS.EXPERT_MARTIAL_ARTIST, SUPER_POWERS.MARKSMAN],
         age: 35,
         wearCape: false,
         fromEarth: true
@@ -162,7 +163,7 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'Logan',
         franchise: 'Marvel Comics',
         description: 'Mutant with regenerative healing factor and adamantium claws',
-        superPower: 'Regenerative healing and enhanced senses',
+        superPowers: [SUPER_POWERS.REGENERATIVE_HEALING_FACTOR, SUPER_POWERS.ENHANCED_SENSES, SUPER_POWERS.ENHANCED_AGILITY],
         age: 150,
         wearCape: false,
         fromEarth: true
