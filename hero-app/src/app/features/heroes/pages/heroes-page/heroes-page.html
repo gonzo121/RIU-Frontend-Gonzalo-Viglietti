@@ -1,0 +1,6 @@
+<app-hero-table
+  [heroes]="heroes()"
+  (view)="onView($event)"
+  (edit)="onEdit($event)"
+  (delete)="onDelete($event)"
+></app-hero-table>
