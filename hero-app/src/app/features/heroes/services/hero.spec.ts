@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { HeroService } from './hero';
 import { CreateHero, Hero } from '../models/hero.model';
+import { SUPER_POWERS } from '../data/powers.data';
 
 describe('HeroService', () => {
   let service: HeroService;
@@ -13,7 +14,7 @@ describe('HeroService', () => {
     realName: 'Miles Morales',
     franchise: 'Marvel Comics',
     description: 'The new Spider-Man',
-    superPower: 'Wall-crawling and spider-sense',
+    superPowers: [SUPER_POWERS.WALL_CRAWLING, SUPER_POWERS.SPIDER_SENSE, SUPER_POWERS.CONTROL_LIGHTNING],
     age: 15,
     wearCape: false,
     fromEarth: true,
