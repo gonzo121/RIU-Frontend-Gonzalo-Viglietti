@@ -1,0 +1,94 @@
+.heroes-page{
+    max-width: 1600px;
+    margin: 0 auto;
+    
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    padding: 24px 32px;
+    box-sizing: border-box;
+
+    overflow: hidden;
+
+
+    .page-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        flex: 0 0 auto;
+
+
+        margin-bottom: 20px;
+
+
+        div{
+            h1{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                .title-icon{
+                    height: 50px;
+                }
+            }
+        }
+    
+    }
+
+    .toolbar{
+        margin-top: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+
+        .search-field{
+            width: 40vw;
+
+        }
+
+        .add-button{
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            align-items: stretch;
+
+            .search-field{
+                width: 100%;
+            }
+
+            .add-button{
+                margin-top: 1rem;
+                width: 100%;
+            }
+            
+        }
+
+    }
+}
+
+
+:host {
+  display: block;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+
+
+.table-card {
+  flex: 1 1 auto;
+
+  // FUNDAMENTAL para que el hijo pueda hacer scroll
+  min-height: 0;
+
+  display: flex;
+  overflow: hidden;
+
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+}

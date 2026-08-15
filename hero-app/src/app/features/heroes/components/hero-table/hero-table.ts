@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { Hero } from '../../models/hero.model';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-hero-table',
@@ -16,6 +17,7 @@ import { Hero } from '../../models/hero.model';
     MatTooltipModule,
     MatInputModule,
     MatPaginatorModule,
+    MatChipsModule
   ],
   standalone: true,
   templateUrl: './hero-table.html',
@@ -30,6 +32,7 @@ export class HeroTable {
   readonly view = output<Hero>();
 
   protected readonly displayedColumns: string[] = [
+    'icon',
     'name',
     'realName',
     'franchise',

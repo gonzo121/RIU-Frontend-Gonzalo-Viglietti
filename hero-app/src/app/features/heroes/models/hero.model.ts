@@ -8,12 +8,13 @@ export interface Hero {
     age: number;
     wearCape: boolean;
     fromEarth: boolean;
-
+    icon?: string;
 }
 
 export interface SuperHeroPowers{
     id: number;
     name: string;
+    icon?: string;
 }
 
 

@@ -3,10 +3,20 @@ import { HeroTable } from "../../components/hero-table/hero-table";
 import { Hero } from '../../models/hero.model';
 import { HeroService } from '../../services/hero';
 import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatAnchor, MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: 'app-heroes-page',
-  imports: [HeroTable],
+  imports: [
+    HeroTable, 
+    MatFormFieldModule, 
+    MatIconModule, 
+    MatInputModule, 
+    MatAnchor, 
+    MatButtonModule],
   standalone: true,
   templateUrl: './heroes-page.html',
   styleUrl: './heroes-page.scss',
@@ -27,6 +37,10 @@ export class HeroesPage {
   protected onSearchTermChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     this.searchTerm.set(inputElement.value);
+  }
+
+  addHero(){
+
   }
 
   onEdit(hero: Hero) {

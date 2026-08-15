@@ -1,0 +1,156 @@
+:host {
+  display: flex;
+  flex: 1;
+
+  min-height: 0;
+  width: 100%;
+}
+
+
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    overflow: hidden;
+
+    .table-scroll {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: auto;
+        scrollbar-width: thin;
+        table {
+            width: 100%;
+            min-width: 1100px;
+
+            .mat-mdc-header-row {
+                height: 56px;
+                position: sticky;
+                top: 0;
+                z-index: 3;
+
+                background: white;
+
+            }
+
+            .mat-mdc-header-cell {
+                font-size: 0.75rem;
+                font-weight: 600;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                opacity: 0.7;
+            }
+
+            .mat-mdc-row {
+                min-height: 56px;
+                transition: background-color 120ms ease;
+            }
+
+            .mat-mdc-row:hover {
+                background-color: rgba(0, 0, 0, 0.025);
+            }
+
+            .mat-mdc-cell,
+            .mat-mdc-header-cell {
+                padding-inline: 16px;
+            }
+
+            .mat-mdc-cell {
+                border-bottom-color: rgba(0, 0, 0, 0.07);
+            }
+
+            .hero-icon{
+                height: 30px;
+            }
+
+            .franchise-chip{
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;   
+
+                .franchise-content {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    white-space: nowrap;
+
+                    .franchise-logo {
+                        width: auto;
+                        height: 18px;
+                        max-width: 32px;
+                        object-fit: contain;
+                        flex-shrink: 0;
+                    }
+
+
+                }
+
+            }
+
+            .super-power-chip{
+                .super-power-icon{
+                    height: 15px;
+                }
+
+            }
+
+            .boolean-yes{
+                color: green;
+            }
+
+            .boolean-no{
+                color: red;
+            }
+
+            // actions
+            .actions {
+                display: flex;
+                align-items: center;
+                gap: 2px;
+            }
+
+
+        }
+
+        mat-paginator {
+            flex: 0 0 auto;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            background: white;
+            z-index: 2;
+        }
+
+    }
+
+}
+
+
+@media (max-width: 768px) {
+  table {
+    min-width: 800px;
+  }
+
+  .table-scroll {
+    overflow: auto;
+  }
+
+  mat-paginator {
+    position: sticky;
+    bottom: 0;
+
+    width: 100%;
+
+    background: white;
+
+    z-index: 10;
+  }
+}
+
+
+table {
+  width: 100%;
+}
+
+
+

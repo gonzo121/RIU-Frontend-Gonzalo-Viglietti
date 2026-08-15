@@ -8,10 +8,11 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'Clark Kent',
         franchise: 'DC Comics',
         description: 'The Man of Steel',
-        superPowers: [SUPER_POWERS.SUPER_SPEED, SUPER_POWERS.SUPER_STRENGTH, SUPER_POWERS.SUPER_SPEED],
+        superPowers: [SUPER_POWERS.FLIGHT, SUPER_POWERS.SUPER_STRENGTH, SUPER_POWERS.SUPER_SPEED],
         age: 35,
         wearCape: true,
-        fromEarth: false
+        fromEarth: false,
+        icon: 'assets/hero-icon/superman.png'
     },
     {
         id: 2,
@@ -22,7 +23,8 @@ export const INITIAL_HEROES: Hero[] = [
         superPowers: [SUPER_POWERS.GENIUS_INTELLECT, SUPER_POWERS.EXPERT_MARTIAL_ARTIST],
         age: 40,
         wearCape: true,
-        fromEarth: true
+        fromEarth: true,
+        icon: 'assets/hero-icon/batman-old.png'
     }
     ,
     {
@@ -34,7 +36,8 @@ export const INITIAL_HEROES: Hero[] = [
         superPowers: [SUPER_POWERS.SUPER_STRENGTH, SUPER_POWERS.SUPER_AGILITY],
         age: 3000,
         wearCape: false,
-        fromEarth: false
+        fromEarth: false,
+        icon: 'assets/hero-icon/wonderwoman.webp'
     },
     {
         id: 4,
@@ -45,7 +48,8 @@ export const INITIAL_HEROES: Hero[] = [
         superPowers: [SUPER_POWERS.WALL_CRAWLING, SUPER_POWERS.SPIDER_SENSE],
         age: 18,
         wearCape: false,
-        fromEarth: true
+        fromEarth: true,
+        icon: 'assets/hero-icon/spiderman.webp'
     },
     {
         id: 5,
@@ -56,7 +60,8 @@ export const INITIAL_HEROES: Hero[] = [
         superPowers: [SUPER_POWERS.POWERED_ARMOR],
         age: 45,
         wearCape: false,
-        fromEarth: true
+        fromEarth: true,
+        icon: 'assets/hero-icon/ironman.webp'
     },
     {
         id: 6,
@@ -67,7 +72,8 @@ export const INITIAL_HEROES: Hero[] = [
         superPowers: [SUPER_POWERS.ENHANCED_STRENGTH, SUPER_POWERS.ENHANCED_AGILITY],
         age: 100,
         wearCape: false,
-        fromEarth: true
+        fromEarth: true,
+        icon: 'assets/hero-icon/captainamerica.webp'
     },
     {
         id: 7,
@@ -78,7 +84,8 @@ export const INITIAL_HEROES: Hero[] = [
         superPowers: [SUPER_POWERS.CONTROL_LIGHTNING, SUPER_POWERS.CONTROL_WEATHER],
         age: 1500,
         wearCape: true,
-        fromEarth: false
+        fromEarth: false,
+        icon: 'assets/hero-icon/thor.png'
     },
     {
         id: 8,
@@ -89,7 +96,8 @@ export const INITIAL_HEROES: Hero[] = [
         superPowers: [SUPER_POWERS.ENHANCED_STRENGTH, SUPER_POWERS.ENHANCED_AGILITY, SUPER_POWERS.VIBRANIUM_SUIT],
         age: 30,
         wearCape: false,
-        fromEarth: true
+        fromEarth: true,
+        icon: 'assets/hero-icon/black-panther.png'
     },
     {
         id: 9,
@@ -100,7 +108,8 @@ export const INITIAL_HEROES: Hero[] = [
         superPowers: [SUPER_POWERS.SUPER_STRENGTH, SUPER_POWERS.SUPERHUMAN_DURABILITY],
         age: 40,
         wearCape: false,
-        fromEarth: true
+        fromEarth: true,
+        icon: 'assets/hero-icon/hulk.webp'
     },
     {
         id: 10,
@@ -111,7 +120,8 @@ export const INITIAL_HEROES: Hero[] = [
         superPowers: [SUPER_POWERS.SUPER_SPEED, SUPER_POWERS.TIME_MANIPULATION],
         age: 28,
         wearCape: false,
-        fromEarth: true
+        fromEarth: true,
+        icon: 'assets/hero-icon/flash.webp'
     },
     {
         id: 11,
@@ -122,7 +132,8 @@ export const INITIAL_HEROES: Hero[] = [
         superPowers: [SUPER_POWERS.POWER_RING],
         age: 32,
         wearCape: false,
-        fromEarth: true
+        fromEarth: true,
+        icon: 'assets/hero-icon/green-lantern.webp'
     },
     {
         id: 12,
@@ -133,7 +144,8 @@ export const INITIAL_HEROES: Hero[] = [
         superPowers: [SUPER_POWERS.COMMUNICATE_WITH_MARINE_LIFE, SUPER_POWERS.SUPER_STRENGTH],
         age: 35,
         wearCape: false,
-        fromEarth: true
+        fromEarth: true,
+        icon: 'assets/hero-icon/aquaman.png'
     },
     {
         id: 13,
@@ -141,10 +153,11 @@ export const INITIAL_HEROES: Hero[] = [
         realName: 'Stephen Strange',
         franchise: 'Marvel Comics',
         description: 'Master of the mystic arts and Sorcerer Supreme',
-        superPowers: [SUPER_POWERS.MAGIC, SUPER_POWERS.TIME_MANIPULATION],
+        superPowers: [SUPER_POWERS.MAGIC, SUPER_POWERS.TIME_AND_SPACE_MANIPULATION],
         age: 45,
         wearCape: true,
-        fromEarth: true
+        fromEarth: true,
+        icon: 'assets/hero-icon/doctorstrange.png'
     },
     {
         id: 14,
@@ -155,7 +168,8 @@ export const INITIAL_HEROES: Hero[] = [
         superPowers: [SUPER_POWERS.EXPERT_MARTIAL_ARTIST, SUPER_POWERS.MARKSMAN],
         age: 35,
         wearCape: false,
-        fromEarth: true
+        fromEarth: true,
+        icon: 'assets/hero-icon/blackwidow.png'
     },
     {
         id: 15,
@@ -166,6 +180,7 @@ export const INITIAL_HEROES: Hero[] = [
         superPowers: [SUPER_POWERS.REGENERATIVE_HEALING_FACTOR, SUPER_POWERS.ENHANCED_SENSES, SUPER_POWERS.ENHANCED_AGILITY],
         age: 150,
         wearCape: false,
-        fromEarth: true
+        fromEarth: true,
+        icon: 'assets/hero-icon/wolverine.png'
     }
 ];
