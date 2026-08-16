@@ -7,16 +7,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatAnchor, MatButtonModule } from "@angular/material/button";
+import { HeroCardList } from '../../components/hero-card-list/hero-card-list';
 
 @Component({
   selector: 'app-heroes-page',
   imports: [
-    HeroTable, 
+    HeroTable,
+    HeroCardList, 
     MatFormFieldModule, 
     MatIconModule, 
     MatInputModule, 
     MatAnchor, 
-    MatButtonModule],
+    MatButtonModule,
+  ],
   standalone: true,
   templateUrl: './heroes-page.html',
   styleUrl: './heroes-page.scss',
@@ -55,5 +58,5 @@ export class HeroesPage {
     console.log('Deleting hero:', hero);
     this.heroService.deleteHero(hero.id);
   }
-
+  
 }

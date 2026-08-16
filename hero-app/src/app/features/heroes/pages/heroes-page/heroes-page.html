@@ -5,9 +5,8 @@
             <p>Administración de la base de datos de super héroes</p>
         </div>
 
-    </header>
 
-    <div class="toolbar">
+            <div class="toolbar">
         <mat-form-field 
             appearance="outline" 
             class="search-field" 
@@ -51,17 +50,34 @@
     </div>
 
 
+    </header>
 
-    <div class="table-card">
-        <app-hero-table
+
+
+    <div class="desktop-heroes">
+
+        <div class="table-card">
+            <app-hero-table
+                [heroes]="heroes()"
+                [searchValue]="searchTerm()"
+                (view)="onView($event)"
+                (edit)="onEdit($event)"
+                (delete)="onDelete($event)"
+            >
+            </app-hero-table>
+
+        </div>
+    </div>
+
+    <div class="mobile-heroes">
+        <app-hero-card-list
             [heroes]="heroes()"
             (view)="onView($event)"
             (edit)="onEdit($event)"
             (delete)="onDelete($event)"
-        >
-        </app-hero-table>
-
+        />
     </div>
+
 
 </section>
 

@@ -7,6 +7,8 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { Hero } from '../../models/hero.model';
 import { MatChipsModule } from '@angular/material/chips';
+import { SuperPowerChip } from '../../../../shared/ui/super-power-chip/super-power-chip';
+import { UppercaseDirective } from "../../../../shared/directives/uppercase.directive";
 
 @Component({
   selector: 'app-hero-table',
@@ -17,8 +19,10 @@ import { MatChipsModule } from '@angular/material/chips';
     MatTooltipModule,
     MatInputModule,
     MatPaginatorModule,
-    MatChipsModule
-  ],
+    MatChipsModule,
+    SuperPowerChip,
+    UppercaseDirective
+],
   standalone: true,
   templateUrl: './hero-table.html',
   styleUrl: './hero-table.scss',
@@ -26,6 +30,7 @@ import { MatChipsModule } from '@angular/material/chips';
 })
 export class HeroTable {
   readonly heroes = input.required<Hero[]>();
+  readonly searchValue = input.required<string>();
 
   readonly edit = output<Hero>();
   readonly delete = output<Hero>();

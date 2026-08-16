@@ -1,0 +1,52 @@
+.hero-card-list{
+
+    .hero-card{
+
+            margin-bottom: 0.5rem;
+
+        mat-card-header{
+            justify-content: space-around;
+
+        }
+
+        .franchise-icon{
+            display: flex;
+            width: 6rem;
+            height: 3rem;
+        }
+
+        .content-hero-row{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            .boolean-yes{
+                color: green;
+            }
+
+            .boolean-no{
+                color: red;
+            }
+
+        }
+
+        .actions{
+            display: flex;
+            justify-content: space-around;
+            margin: 1rem 0
+        }
+        
+    }
+
+}
+
+  mat-paginator {
+    position: sticky;
+    bottom: 0;
+
+    width: 100%;
+
+    // background: white;
+
+    z-index: 10;
+  }

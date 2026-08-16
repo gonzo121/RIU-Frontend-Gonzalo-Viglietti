@@ -1,4 +1,4 @@
-import { SuperHeroPowers } from '../models/hero.model';
+import { SuperHeroPower } from '../models/hero.model';
 
 export const SUPER_POWERS = {
     SUPER_STRENGTH: {
@@ -119,4 +119,4 @@ export const SUPER_POWERS = {
         icon: 'assets/super-power-icon/senses.png'
     }
 
-} as const satisfies Record<string, SuperHeroPowers>;
+} as const satisfies Record<string, SuperHeroPower>;

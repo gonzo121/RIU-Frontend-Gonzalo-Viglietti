@@ -1,8 +1,14 @@
-.heroes-page{
+:host {
+    display: block;
+    height: 100dvh;
+    overflow: hidden;
+}
+
+.heroes-page {
     max-width: 1600px;
-    margin: 0 auto;
-    
     height: 100%;
+    margin: 0 auto;
+
     display: flex;
     flex-direction: column;
 
@@ -11,84 +17,146 @@
 
     overflow: hidden;
 
-
-    .page-header{
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-
+    .page-header {
         flex: 0 0 auto;
 
-
-        margin-bottom: 20px;
-
-
-        div{
-            h1{
-                display: flex;
-                align-items: center;
-                gap: 10px;
-
-                .title-icon{
-                    height: 50px;
-                }
-            }
-        }
-    
-    }
-
-    .toolbar{
-        margin-top: 2rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        margin-bottom: 20px;
+
+        h1 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .title-icon {
+                height: 50px;
+            }
+        }
+    }
+
+    .toolbar {
+        flex: 0 0 auto;
+
+        gap: 1rem;
+        margin-top: 2rem;
         margin-bottom: 16px;
 
-        .search-field{
-            width: 40vw;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
+        .search-field {
+            width: 40vw;
         }
 
-        .add-button{
+        .add-button {
             border-radius: 5px;
         }
-
-        @media (max-width: 768px) {
-            flex-direction: column;
-            align-items: stretch;
-
-            .search-field{
-                width: 100%;
-            }
-
-            .add-button{
-                margin-top: 1rem;
-                width: 100%;
-            }
-            
-        }
-
     }
 }
 
+/*
+ * IMPORTANTE:
+ * Este es el contenedor que ocupa TODO el espacio
+ * disponible debajo del toolbar.
+ */
+.desktop-heroes {
+    flex: 1 1 auto;
+    min-height: 0;
 
-:host {
-  display: block;
-  height: 100dvh;
-  overflow: hidden;
+    display: flex;
+
+    overflow: hidden;
 }
-
-
 
 .table-card {
-  flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    min-width: 0;
 
-  // FUNDAMENTAL para que el hijo pueda hacer scroll
-  min-height: 0;
+    display: flex;
 
-  display: flex;
-  overflow: hidden;
+    overflow: hidden;
 
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
 }
+
+/*
+ * También hacemos que el componente Angular
+ * pueda ocupar/reducirse dentro del flex.
+ */
+app-hero-table {
+    flex: 1 1 auto;
+    min-height: 0;
+    min-width: 0;
+
+    display: flex;
+}
+
+.mobile-heroes {
+    display: none;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 768px) {
+    :host {
+        height: auto;
+        min-height: 100dvh;
+        overflow: visible;
+    }
+
+    .heroes-page {
+        height: auto;
+        min-height: 100dvh;
+
+        padding: 12px;
+
+        overflow: visible;
+
+        .page-header {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 12px;
+            top: 0;
+            position: sticky;
+            z-index: 10;
+            background-color: #fff8f8;
+        }
+
+        .toolbar {
+            width: 100%;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            flex-direction: column;
+            align-items: stretch;
+
+            .search-field {
+                width: 100%;
+            }
+
+            .add-button {
+                width: 100%;
+            }
+        }
+    }
+
+    .desktop-heroes {
+        display: none;
+    }
+
+    .mobile-heroes {
+        display: block;
+    }
+
+
+}
+
+

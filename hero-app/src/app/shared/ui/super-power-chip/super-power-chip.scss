@@ -1,0 +1,21 @@
+.super-power-chip{
+    max-width: 300px;
+    height: auto;
+    min-height: 32px;
+
+    .icon-container{
+        .super-power-icon{
+            height: 15px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+    }
+
+    .power-name {
+        white-space: normal;
+        overflow-wrap: break-word;
+        line-height: 1.2;
+    }
+
+}
