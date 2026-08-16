@@ -1,0 +1,41 @@
+<div class="dialog-container">
+    
+    <div class="dialog-header">
+        <div class="warning-icon">
+            <mat-icon>warning</mat-icon>
+        </div>
+
+        <h2
+            mat-dialog-title
+        >
+            {{ data.title }}
+        </h2>
+    </div>
+
+    <mat-dialog-content>
+        <p>
+            {{ data.message }}
+        </p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button 
+            mat-button 
+            [mat-dialog-close]="false"
+        >
+            {{ data.cancelText?? 'Cancelar' }}
+        </button>
+
+        <button 
+            mat-flat-button 
+            class="delete-button" 
+            [mat-dialog-close]="true"
+        >
+            <mat-icon>
+                delete
+            </mat-icon>
+            {{ data.confirmText?? 'Eliminar'}}
+        </button>
+    </mat-dialog-actions>
+
+</div>

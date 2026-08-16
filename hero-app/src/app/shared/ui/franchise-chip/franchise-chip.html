@@ -1,0 +1,28 @@
+<mat-chip class="franchise-chip">
+    <span class="franchise-content">
+        @switch (franchise()) {
+            @case ('Marvel Comics') {
+                <img 
+                    src="assets/franchise/marvel.png" 
+                    alt="Marvel Comics"
+                    class="franchise-logo"
+                >
+            }
+
+            @case ('DC Comics') {
+                <img 
+                    src="assets/franchise/dc.png" 
+                    alt="DC Comics"
+                    class="franchise-logo"
+                >
+            }
+
+            @default {
+                {{'-'}}
+            }
+        }
+        <span>
+            {{franchise()}}
+        </span>
+    </span>
+</mat-chip>

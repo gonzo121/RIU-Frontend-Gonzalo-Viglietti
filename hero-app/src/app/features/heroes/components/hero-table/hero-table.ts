@@ -9,6 +9,7 @@ import { Hero } from '../../models/hero.model';
 import { MatChipsModule } from '@angular/material/chips';
 import { SuperPowerChip } from '../../../../shared/ui/super-power-chip/super-power-chip';
 import { UppercaseDirective } from "../../../../shared/directives/uppercase.directive";
+import { FranchiseChip } from '../../../../shared/ui/franchise-chip/franchise-chip';
 
 @Component({
   selector: 'app-hero-table',
@@ -21,9 +22,9 @@ import { UppercaseDirective } from "../../../../shared/directives/uppercase.dire
     MatPaginatorModule,
     MatChipsModule,
     SuperPowerChip,
-    UppercaseDirective
+    UppercaseDirective,
+    FranchiseChip
 ],
-  standalone: true,
   templateUrl: './hero-table.html',
   styleUrl: './hero-table.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -61,6 +62,8 @@ export class HeroTable {
     this.pageIndex.set(event.pageIndex);
     this.pageSize.set(event.pageSize);
   }
+
+
 
 
 }

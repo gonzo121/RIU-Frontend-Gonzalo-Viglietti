@@ -21,7 +21,6 @@ import { UppercaseDirective } from '../../../../shared/directives/uppercase.dire
   ],
   templateUrl: './hero-card-list.html',
   styleUrl: './hero-card-list.scss',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroCardList {

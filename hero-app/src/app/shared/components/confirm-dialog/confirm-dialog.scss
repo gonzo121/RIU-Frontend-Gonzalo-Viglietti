@@ -1,0 +1,55 @@
+:host {
+    display: block;
+}
+
+.dialog-container{
+    .dialog-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        padding: 24px 24px 0;
+
+        .warning-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: rgba(244, 67, 54, 0.1);
+
+            mat-icon {
+                color: #d32f2f;
+            }
+        }
+
+
+        h2 {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+
+    mat-dialog-content {
+        padding-top: 20px;
+
+        p {
+            margin: 0;
+            line-height: 1.5;
+        }
+    }
+
+    mat-dialog-actions {
+        padding: 16px 24px 24px;
+    }
+
+    .delete-button {
+        background-color: #d32f2f;
+        color: white;
+    }
+}

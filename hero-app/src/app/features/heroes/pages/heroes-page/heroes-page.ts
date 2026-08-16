@@ -8,6 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatAnchor, MatButtonModule } from "@angular/material/button";
 import { HeroCardList } from '../../components/hero-card-list/hero-card-list';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialog, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog';
 
 @Component({
   selector: 'app-heroes-page',
@@ -19,13 +21,14 @@ import { HeroCardList } from '../../components/hero-card-list/hero-card-list';
     MatInputModule, 
     MatAnchor, 
     MatButtonModule,
+    MatDialogModule
   ],
-  standalone: true,
   templateUrl: './heroes-page.html',
   styleUrl: './heroes-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroesPage {
+  private readonly dialog = inject(MatDialog)
   private readonly heroService = inject(HeroService);
 
   private readonly router = inject(Router);
@@ -43,7 +46,7 @@ export class HeroesPage {
   }
 
   addHero(){
-
+    this.router.navigate(['/heroes', 'new'])
   }
 
   onEdit(hero: Hero) {
@@ -55,8 +58,29 @@ export class HeroesPage {
   }
 
   onDelete(hero: Hero): void {
-    console.log('Deleting hero:', hero);
-    this.heroService.deleteHero(hero.id);
+    const dialogRef = this.dialog.open<
+      ConfirmDialog, 
+      ConfirmDialogData, 
+      boolean
+    >(
+      ConfirmDialog,
+      {
+        width: '400px',
+        maxWidth: '90vw',
+        data: {
+          title: 'Eliminar héroe',
+          message: `¿Estás seguro de que deseas eliminar a ${hero.name}?`,
+        }
+      }
+    )
+
+    dialogRef.afterClosed().subscribe((confirmed) => {
+      if(!confirmed) return;
+
+      this.heroService.deleteHero(hero.id);
+
+    })
+
   }
   
 }
