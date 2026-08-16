@@ -1,97 +1,122 @@
-import { SuperHeroPowers } from '../models/hero.model';
+import { SuperHeroPower } from '../models/hero.model';
 
 export const SUPER_POWERS = {
     SUPER_STRENGTH: {
         id: 1,
-        name: 'Super strength'
+        name: 'Super fuerza',
+        icon: 'assets/super-power-icon/super-strength.png'
+
     },
     FLIGHT: {
         id: 2,
-        name: 'Flight'
+        name: 'Volar',
+        icon: 'assets/super-power-icon/fly.png'
     },
     GENIUS_INTELLECT: {
         id: 3,
-        name: 'Genius intellect'
+        name: 'Intelecto nivel genio',
+        icon: 'assets/super-power-icon/genio.png'
     },
     EXPERT_MARTIAL_ARTIST: {
         id: 4,
-        name: 'Expert martial artist'
+        name: 'Experto en artes marciales',
+        icon: 'assets/super-power-icon/martial-arts.png'
     },
     SUPER_AGILITY: {
         id: 5,
-        name: 'Super agility'
+        name: 'Super agilidad',
+        icon: 'assets/super-power-icon/super-agility.png'
     },
     WALL_CRAWLING: {
         id: 6,
-        name: 'Wall-crawling'
+        name: 'Trepar por las paredes',
+        icon: 'assets/super-power-icon/spider-crawl.png'
     },
     SPIDER_SENSE: {
         id: 7,
-        name: 'Spider-sense'
+        name: 'Sentido arácnido',
+        icon: 'assets/super-power-icon/spider-sense.png'
     },
     POWERED_ARMOR: {
         id: 8,
-        name: 'Powered armor suit'
+        name: 'Super traje',
+        icon: 'assets/super-power-icon/super-suit.png'
     },
     ENHANCED_STRENGTH: {
         id: 9,
-        name: 'Enhanced strength'
+        name: 'Fuerza mejorada',
+        icon: 'assets/super-power-icon/strength.png'
     },
     ENHANCED_AGILITY: {
         id: 10,
-        name: 'Enhanced agility'
+        name: 'Agilidad mejorada',
+        icon: 'assets/super-power-icon/speed.png'
     },
     CONTROL_WEATHER: {
         id: 11,
-        name: 'Control weather'
+        name: 'Controla el clima',
+        icon: 'assets/super-power-icon/weather.png'
     },
     CONTROL_LIGHTNING: {
         id: 12,
-        name: 'Control over lightning'
+        name: 'Controla los rayos',
+        icon: 'assets/super-power-icon/lightning.png'
     },
     VIBRANIUM_SUIT: {
         id: 12,
-        name: 'Vibranium suit'
+        name: 'Traje de vibranio',
+        icon: 'assets/super-power-icon/vibranium.png'
     },
     SUPERHUMAN_DURABILITY: {
         id: 13,
-        name: 'Superhuman durability'
+        name: 'Durabilidad sobrehumana',
+        icon: 'assets/super-power-icon/durabilidad.png'
     },
     SUPER_SPEED: {
         id: 14,
-        name: 'Super speed'
+        name: 'Super velocidad',
+        icon: 'assets/super-power-icon/speed.webp'
     },
     TIME_MANIPULATION: {
         id: 15,
-        name: 'Time manipulation'
+        name: 'Manipulación del tiempo',
+        icon: 'assets/super-power-icon/time-manipulation.png'
+
     },
     POWER_RING: {
         id: 16,
-        name: 'Power ring that can create constructs'
+        name: 'Anillo de poder capaz de crear cosas',
+        icon: 'assets/super-power-icon/anillo.webp'
     },
     COMMUNICATE_WITH_MARINE_LIFE: {
         id: 17,
-        name: 'Ability to communicate with marine life'
+        name: 'Capacidad para comunicarse con la vida marina',
+        icon: 'assets/super-power-icon/vida-marina.png'
     },
     MAGIC: {
         id: 18,
-        name: 'Magic'
+        name: 'Magia',
+        icon: 'assets/super-power-icon/magic.png'
     },
     TIME_AND_SPACE_MANIPULATION: {
         id: 19,
-        name: 'Manipulation of time and space'
+        name: 'Manipulación del tiempo y del espacio',
+        icon: 'assets/super-power-icon/time-manipulation.png'
     },
     MARKSMAN: {
         id: 20,
-        name: 'Marksman'
+        name: 'Francotirador',
+        icon: 'assets/super-power-icon/marksman.png'
     },
     REGENERATIVE_HEALING_FACTOR: {
         id: 21,
-        name: 'Regenerative healing factor'
+        name: 'Factor de curación regenerativa',
+        icon: 'assets/super-power-icon/healing.png'
     },
     ENHANCED_SENSES: {
         id: 22,
-        name: 'Enhanced senses'
+        name: 'Sentidos mejorados',
+        icon: 'assets/super-power-icon/senses.png'
     }
 
-} as const satisfies Record<string, SuperHeroPowers>;
+} as const satisfies Record<string, SuperHeroPower>;

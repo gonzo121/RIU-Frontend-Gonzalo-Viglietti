@@ -4,16 +4,17 @@ export interface Hero {
     realName: string;
     franchise: string;
     description: string;
-    superPowers: SuperHeroPowers[];
+    superPowers: SuperHeroPower[];
     age: number;
     wearCape: boolean;
     fromEarth: boolean;
-
+    icon?: string;
 }
 
-export interface SuperHeroPowers{
+export interface SuperHeroPower{
     id: number;
     name: string;
+    icon?: string;
 }
 
 
