@@ -70,6 +70,10 @@ export class HeroesPage {
         data: {
           title: 'Eliminar héroe',
           message: `¿Estás seguro de que deseas eliminar a ${hero.name}?`,
+          confirm: {
+            icon: 'delete',
+            text: 'Eliminar'
+          },
         }
       }
     )

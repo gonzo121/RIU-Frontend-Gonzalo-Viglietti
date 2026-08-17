@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 export interface ConfirmDialogData {
   title: string;
   message: string;
-  confirmText?: string;
+  confirm?: { icon?:string, text?: string };
   cancelText?: string;
 }
 

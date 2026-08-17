@@ -7,6 +7,10 @@
                     alt="Marvel Comics"
                     class="franchise-logo"
                 >
+                <span class="franchise-name">
+                    {{franchise()}}
+                </span>
+
             }
 
             @case ('DC Comics') {
@@ -15,14 +19,17 @@
                     alt="DC Comics"
                     class="franchise-logo"
                 >
+                <span class="franchise-name">
+                    {{franchise()}}
+                </span>
             }
 
             @default {
-                {{'-'}}
+                <span class="franchise-name">
+                    {{'-'}}
+                </span>
+                       
             }
         }
-        <span>
-            {{franchise()}}
-        </span>
     </span>
 </mat-chip>

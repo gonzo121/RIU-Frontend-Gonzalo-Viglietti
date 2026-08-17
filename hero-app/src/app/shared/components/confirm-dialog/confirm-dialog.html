@@ -21,6 +21,7 @@
     <mat-dialog-actions align="end">
         <button 
             mat-button 
+            class="cancel-button"
             [mat-dialog-close]="false"
         >
             {{ data.cancelText?? 'Cancelar' }}
@@ -28,13 +29,15 @@
 
         <button 
             mat-flat-button 
-            class="delete-button" 
+            class="confirm-button" 
             [mat-dialog-close]="true"
         >
             <mat-icon>
-                delete
+                {{data.confirm?.icon?? 'check'}}
             </mat-icon>
-            {{ data.confirmText?? 'Eliminar'}}
+            <span class="confirm-text">
+                {{ data.confirm?.text?? 'Aceptar'}}
+            </span>
         </button>
     </mat-dialog-actions>
 

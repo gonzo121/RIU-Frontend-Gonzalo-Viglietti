@@ -22,9 +22,6 @@
 
             background: rgba(244, 67, 54, 0.1);
 
-            mat-icon {
-                color: #d32f2f;
-            }
         }
 
 
@@ -48,8 +45,8 @@
         padding: 16px 24px 24px;
     }
 
-    .delete-button {
-        background-color: #d32f2f;
+    .confirm-button {
+        // background-color: #d32f2f;
         color: white;
     }
 }
