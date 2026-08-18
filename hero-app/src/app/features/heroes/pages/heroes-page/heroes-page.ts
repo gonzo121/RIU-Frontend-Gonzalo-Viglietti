@@ -80,20 +80,20 @@ export class HeroesPage {
     );
   }
 
-  onEdit(hero: Hero) {
+  editHero(hero: Hero) {
     this.loadingService.run(
       () => this.router.navigate(['/heroes', hero.id, 'edit']), 400
     );
     
   }
 
-  onView(hero: Hero) {
+  viewHero(hero: Hero) {
     this.loadingService.run(
-      () => this.router.navigate(['/heroes', hero.id, 'view']), 400
+      () => this.router.navigate(['/heroes', hero.id]), 400
     );
   }
 
-  onDelete(hero: Hero): void {
+  deleteHero(hero: Hero): void {
     const dialogRef = this.dialog.open<
       ConfirmDialog, 
       ConfirmDialogData, 
@@ -114,12 +114,13 @@ export class HeroesPage {
       }
     )
 
-    dialogRef.afterClosed().subscribe((confirmed) => {
+    dialogRef.afterClosed().subscribe(async (confirmed) => {
       if(!confirmed) return;
 
-      this.heroService.deleteHero(hero.id);
-
-    })
+      await this.loadingService.run(
+        () => this.heroService.deleteHero(hero.id), 400
+      );
+    });
 
   }
   

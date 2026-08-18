@@ -1,26 +1,58 @@
 <header class="page-header">
-    <button
-        mat-icon-button
-        type="button"
-        aria-label="Volver"
-        (click)="cancel()"
-    >
-        <mat-icon>arrow_back</mat-icon>
-    </button>
+    @if (viewMode()) {
+        <button
+            mat-icon-button
+            type="button"
+            aria-label="Volver"
+            (click)="cancel()"
+        >
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        
 
-    <div>
-        <h1>
-            {{ isEditMode ? 'Editar héroe' : 'Agregar héroe' }}
-        </h1>
+        <div>
+            <h1>
+                Detalle del superhéroe
+            </h1>
 
-        <p>
-            {{
-                isEditMode
-                    ? 'Modificá la información del superhéroe'
-                    : 'Completá la información del nuevo superhéroe'
-            }}
-        </p>
-    </div>
+            <p>
+                Detalle completo del superhéroe
+            </p>
+        </div>
+        
+        <button
+            mat-flat-button
+            type="button"
+            (click)="editRequested.emit(hero()!.id)"
+        >
+            <mat-icon>edit</mat-icon>
+            Editar
+        </button>
+    } 
+    @else {
+        <button
+            mat-icon-button
+            type="button"
+            aria-label="Volver"
+            (click)="cancel()"
+        >
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+
+        <div>
+            <h1>
+                {{ isEditMode ? 'Editar héroe' : 'Agregar héroe' }}
+            </h1>
+
+            <p>
+                {{
+                    isEditMode
+                        ? 'Modificá la información del superhéroe'
+                        : 'Completá la información del nuevo superhéroe'
+                }}
+            </p>
+        </div>
+    }
 </header>
 
 
@@ -202,6 +234,7 @@
         <button
             mat-stroked-button
             type="button"
+            [disabled]="viewMode()"
             (click)="iconInput.click()"
         >
             <mat-icon>upload</mat-icon>
@@ -230,27 +263,30 @@
     </div>
 
 
-    <div class="form-actions">
+    @if(!viewMode()){
+        <div class="form-actions">
 
-        <button
-            mat-button
-            type="button"
-            (click)="cancel()"
-        >
-            Cancelar
-        </button>
+            <button
+                mat-button
+                type="button"
+                (click)="cancel()"
+            >
+                Cancelar
+            </button>
 
-        <button
-            mat-flat-button
-            type="submit"
-        >
-            <mat-icon>
-                {{ isEditMode ? 'save' : 'add' }}
-            </mat-icon>
+            <button
+                mat-flat-button
+                type="submit"
+            >
+                <mat-icon>
+                    {{ isEditMode ? 'save' : 'add' }}
+                </mat-icon>
 
-            {{ isEditMode ? 'Guardar cambios' : 'Agregar héroe' }}
-        </button>
+                {{ isEditMode ? 'Guardar cambios' : 'Agregar héroe' }}
+            </button>
 
-    </div>
+        </div>
+
+    }
 
 </form>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, output, signal } from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,6 +10,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { SuperPowerChip } from '../../../../shared/ui/super-power-chip/super-power-chip';
 import { UppercaseDirective } from "../../../../shared/directives/uppercase.directive";
 import { FranchiseChip } from '../../../../shared/ui/franchise-chip/franchise-chip';
+import { LoadingService } from '../../../../core/services/loading.service';
 
 @Component({
   selector: 'app-hero-table',
@@ -30,6 +31,7 @@ import { FranchiseChip } from '../../../../shared/ui/franchise-chip/franchise-ch
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroTable {
+  private readonly loadingService = inject(LoadingService);
   readonly heroes = input.required<Hero[]>();
   readonly searchValue = input.required<string>();
 
@@ -58,9 +60,14 @@ export class HeroTable {
     return this.heroes().slice(start, end);
   });
 
-  protected onPageChange(event: PageEvent): void {
-    this.pageIndex.set(event.pageIndex);
-    this.pageSize.set(event.pageSize);
+  protected async onPageChange(event: PageEvent): Promise<void> {
+    await this.loadingService.run(
+      () => {
+        this.pageIndex.set(event.pageIndex);
+        this.pageSize.set(event.pageSize);
+      }, 200
+    );
+
   }
 
 

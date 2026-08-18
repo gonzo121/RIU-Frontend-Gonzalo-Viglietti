@@ -284,7 +284,7 @@ describe('HeroForm', () => {
     expect(
       form.get('icon')?.hasError('fileTooLarge')
     ).toBe(true);
-  })
+  });
 
 });
 

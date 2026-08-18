@@ -1,16 +1,14 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { HeroService } from '../../services/hero';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SUPER_POWERS } from '../../data/powers.data';
-import { CreateHero, Hero, SuperHeroPower } from '../../models/hero.model';
+import { CreateHero, Hero } from '../../models/hero.model';
 import { HeroForm } from '../../components/hero-form/hero-form';
 import { LoadingService } from '../../../../core/services/loading.service';
 
 @Component({
   selector: 'app-hero-form-page',
   imports: [
-    HeroForm
+    HeroForm,
   ],
   templateUrl: './hero-form-page.html',
   styleUrl: './hero-form-page.scss',
@@ -24,13 +22,19 @@ export class HeroFormPage implements OnInit{
   protected hero: Hero | undefined;
 
   protected heroId: number | null = null;
-  
+  protected isViewMode = signal(false);
+  protected isEditMode = signal(false);
+
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
 
     if(!id){
       return
     }
+
+    this.isEditMode.set(this.router.url.endsWith('/edit'));
+    
+    if(!this.isEditMode()) this.isViewMode.set(true);
 
     this.heroId = Number(id);
 
@@ -62,10 +66,15 @@ export class HeroFormPage implements OnInit{
     this.router.navigate(['/heroes'])
   }
 
-  protected async cancel(): Promise<void> {
-    await this.loadingService.run(
-      () => () => {}, 400
-    )
+  protected cancel(): void {
     this.router.navigate(['/heroes']);
+  }
+
+  protected async redirectToEdit(heroId: number): Promise<void>{
+    await this.loadingService.run(
+      () => this.isViewMode.set(false), 400
+    );
+    this.router.navigate(['/heroes', heroId, 'edit'])
+
   }
 }

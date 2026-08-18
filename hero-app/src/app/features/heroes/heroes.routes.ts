@@ -17,9 +17,5 @@ export const HEROES_ROUTES: Routes = [
         path: ':id',
         loadComponent: () => import('./pages/hero-form-page/hero-form-page').then((m) => m.HeroFormPage),
     },
-    {
-        path: ':id/view',
-        loadComponent: () => import('./pages/hero-form-page/hero-form-page').then((m) => m.HeroFormPage),
-    }
 
 ]

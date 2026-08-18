@@ -1,9 +1,7 @@
-import { Component, effect, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, input, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
 import { SUPER_POWERS } from '../../data/powers.data';
 import { SuperHeroPower, CreateHero, Hero } from '../../models/hero.model';
-import { HeroService } from '../../services/hero';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -30,14 +28,17 @@ import { SuperPowerChip } from '../../../../shared/ui/super-power-chip/super-pow
   ],
   templateUrl: './hero-form.html',
   styleUrl: './hero-form.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroForm {
   private readonly fb = inject(FormBuilder);
   readonly hero = input<Hero>();
+  readonly viewMode = input();
 
   readonly createRequested = output<CreateHero>();
   readonly cancelRequested = output();
   readonly updateRequested = output<CreateHero>();
+  readonly editRequested = output<number>();
   
   protected readonly superPowers = Object.values(SUPER_POWERS);
 
@@ -102,14 +103,21 @@ export class HeroForm {
 
   private readonly heroEffect = effect(() => {
     const hero = this.hero();
+    const viewMode = this.viewMode();
 
     if(hero){
       this.heroForm.patchValue(hero);
     }
+
+    if(viewMode){
+      this.heroForm.disable();
+    } else {
+      this.heroForm.enable();
+    }
   })
 
   protected get isEditMode(): boolean {
-    return this.hero() !== undefined;
+    return this.hero() !== undefined && !this.viewMode();
   }
 
   protected onIconSelected(event: Event): void {
