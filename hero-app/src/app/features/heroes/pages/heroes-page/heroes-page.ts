@@ -10,6 +10,9 @@ import { MatAnchor, MatButtonModule } from "@angular/material/button";
 import { HeroCardList } from '../../components/hero-card-list/hero-card-list';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialog, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog';
+import { LoadingService } from '../../../../core/services/loading.service';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { debounceTime, defer, distinctUntilChanged, finalize, switchMap, tap, timer } from 'rxjs';
 
 @Component({
   selector: 'app-heroes-page',
@@ -30,10 +33,36 @@ import { ConfirmDialog, ConfirmDialogData } from '../../../../shared/components/
 export class HeroesPage {
   private readonly dialog = inject(MatDialog)
   private readonly heroService = inject(HeroService);
+  private readonly loadingService = inject(LoadingService)
 
   private readonly router = inject(Router);
 
   protected readonly searchTerm = signal('');
+
+  private readonly searchTerm$ = toObservable(this.searchTerm);
+
+  constructor() {
+    this.searchTerm$
+      .pipe(
+        debounceTime(100),
+        distinctUntilChanged(),
+        switchMap(value => {
+          return defer(() => {
+            this.loadingService.show();
+            return timer(400).pipe(
+              tap(() => {
+                this.searchTerm.set(value);
+              }),
+              finalize(() => {
+                this.loadingService.hide();
+              })
+            );
+          });
+        }),
+        takeUntilDestroyed()
+      )
+      .subscribe()
+  }
 
   protected readonly heroes = computed(() => {
     const term = this.searchTerm();
@@ -42,19 +71,26 @@ export class HeroesPage {
 
   protected onSearchTermChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
-    this.searchTerm.set(inputElement.value);
+    this.searchTerm.set(inputElement.value)
   }
 
   addHero(){
-    this.router.navigate(['/heroes', 'new'])
+    this.loadingService.run(
+      () => this.router.navigate(['/heroes', 'new']), 400
+    );
   }
 
   onEdit(hero: Hero) {
-    this.router.navigate(['/heroes', hero.id, 'edit']);
+    this.loadingService.run(
+      () => this.router.navigate(['/heroes', hero.id, 'edit']), 400
+    );
+    
   }
 
   onView(hero: Hero) {
-    this.router.navigate(['/heroes', hero.id, 'view']);
+    this.loadingService.run(
+      () => this.router.navigate(['/heroes', hero.id, 'view']), 400
+    );
   }
 
   onDelete(hero: Hero): void {

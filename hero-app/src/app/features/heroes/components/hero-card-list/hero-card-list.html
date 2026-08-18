@@ -1,6 +1,6 @@
 <div class="hero-card-list">
 
-    @for (hero of paginatedHeroes(); track hero.id) {
+    @for (hero of visibleHeroes(); track hero.id) {
         <mat-card class="hero-card">
             <mat-card-header>
 
@@ -12,7 +12,7 @@
                     </div>
                 }
 
-                <mat-card-title appUppercaseDirective>
+                <mat-card-title appUppercase>
                     {{ hero.name }}
                 </mat-card-title>
 
@@ -97,13 +97,25 @@
 
             <mat-card-footer>
                 <div class="actions">
-                    <button mat-flat-button color="accent" (click)="view.emit(hero)">
+                    <button 
+                        mat-flat-button 
+                        aria-label="Ver héroe"
+                        (click)="view.emit(hero)"
+                    >
                         Ver
                     </button>
-                    <button mat-flat-button color="green" (click)="edit.emit(hero)">
+                    <button 
+                        mat-flat-button
+                        aria-label="Editar héroe"
+                        (click)="edit.emit(hero)"
+                    >
                         Editar
                     </button>
-                    <button mat-raised-button color="red" (click)="delete.emit(hero)">
+                    <button 
+                        mat-raised-button
+                        aria-label="Eliminar héroe"
+                        (click)="delete.emit(hero)"
+                    >
                         Borrar
                     </button>
                 </div>
@@ -112,13 +124,12 @@
         </mat-card>
     }
 
-    <mat-paginator
-        [length]="heroes().length"
-        [pageSize]="pageSize()"
-        [pageIndex]="pageIndex()"
-        [pageSizeOptions]="[5, 10, 20]"
-        (page)="onPageChange($event)">
-    </mat-paginator>
+    @if (hasMoreHeroes()) {
+        <div
+            #scrollSentinel
+            class="scroll-sentinel">
+        </div>
+    }
 
 
 </div>

@@ -110,5 +110,28 @@ describe('LoadingService', () => {
       expect(service.isLoading()).toBe(false);
     });
 
+    it('should respect the minimun duration', async () => {
+      jest.useFakeTimers();
+
+      jest.spyOn(performance, 'now')
+        .mockReturnValueOnce(0)
+        .mockReturnValueOnce(100);
+
+        const operation = jest.fn().mockResolvedValue('success');
+
+        const promise = service.run(operation, 500);
+
+        await Promise.resolve();
+
+        expect(service.isLoading()).toBe(true);
+
+        await jest.advanceTimersByTimeAsync(400);
+
+        const result = await promise;
+
+        expect(result).toBe('success');
+        expect(service.isLoading()).toBe(false);
+    });
+
   });
 }); 
