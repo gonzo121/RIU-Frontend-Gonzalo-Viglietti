@@ -1,17 +1,12 @@
 <mat-chip class="super-power-chip">
-    <span>
-        <span class="icon-container">
-            @if(superPower().icon){
-                <img 
-                    [src]="superPower().icon" 
-                    [alt]="superPower().name" 
-                    class="super-power-icon"
-                >
-            }
-        </span>
-        <span class="power-name">
-            {{superPower().name}}
-        </span>
-
+  <span>
+    <span class="icon-container">
+      @if (superPower().icon) {
+        <img [src]="superPower().icon" [alt]="superPower().name" class="super-power-icon" />
+      }
     </span>
+    <span class="power-name">
+      {{ superPower().name }}
+    </span>
+  </span>
 </mat-chip>

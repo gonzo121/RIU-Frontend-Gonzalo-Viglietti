@@ -1,292 +1,173 @@
 <header class="page-header">
-    @if (viewMode()) {
-        <button
-            mat-icon-button
-            type="button"
-            aria-label="Volver"
-            (click)="cancel()"
-        >
-            <mat-icon>arrow_back</mat-icon>
-        </button>
-        
+  @if (viewMode()) {
+    <button mat-icon-button type="button" aria-label="Volver" (click)="cancel()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
 
-        <div>
-            <h1>
-                Detalle del superhéroe
-            </h1>
+    <div>
+      <h1>Detalle del superhéroe</h1>
 
-            <p>
-                Detalle completo del superhéroe
-            </p>
-        </div>
-        
-        <button
-            mat-flat-button
-            type="button"
-            (click)="editRequested.emit(hero()!.id)"
-        >
-            <mat-icon>edit</mat-icon>
-            Editar
-        </button>
-    } 
-    @else {
-        <button
-            mat-icon-button
-            type="button"
-            aria-label="Volver"
-            (click)="cancel()"
-        >
-            <mat-icon>arrow_back</mat-icon>
-        </button>
+      <p>Detalle completo del superhéroe</p>
+    </div>
 
-        <div>
-            <h1>
-                {{ isEditMode ? 'Editar héroe' : 'Agregar héroe' }}
-            </h1>
+    <button mat-flat-button type="button" (click)="editRequested.emit(hero()!.id)">
+      <mat-icon>edit</mat-icon>
+      Editar
+    </button>
+  } @else {
+    <button mat-icon-button type="button" aria-label="Volver" (click)="cancel()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
 
-            <p>
-                {{
-                    isEditMode
-                        ? 'Modificá la información del superhéroe'
-                        : 'Completá la información del nuevo superhéroe'
-                }}
-            </p>
-        </div>
-    }
+    <div>
+      <h1>
+        {{ isEditMode ? 'Editar héroe' : 'Agregar héroe' }}
+      </h1>
+
+      <p>
+        {{
+          isEditMode
+            ? 'Modificá la información del superhéroe'
+            : 'Completá la información del nuevo superhéroe'
+        }}
+      </p>
+    </div>
+  }
 </header>
 
+<form class="hero-form" [formGroup]="heroForm" (ngSubmit)="saveHero()">
+  <div class="form-grid">
+    <!-- Name -->
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre del héroe</mat-label>
 
-<form
-    class="hero-form"
-    [formGroup]="heroForm"
-    (ngSubmit)="saveHero()"
->
+      <input matInput formControlName="name" placeholder="Ej: Superman" appUppercase />
 
-    <div class="form-grid">
+      @if (heroForm.controls.name.hasError('required') && heroForm.controls.name.touched) {
+        <mat-error> El nombre es obligatorio </mat-error>
+      }
 
-        <!-- Name -->
-        <mat-form-field appearance="outline">
-            <mat-label>Nombre del héroe</mat-label>
+      @if (heroForm.controls.name.hasError('minlength') && heroForm.controls.name.touched) {
+        <mat-error> El nombre debe tener al menos 2 caracteres </mat-error>
+      }
+    </mat-form-field>
 
-            <input
-                matInput
-                formControlName="name"
-                placeholder="Ej: Superman"
-                appUppercase
-            />
+    <!-- Real Name -->
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre real</mat-label>
 
-            @if ( 
-                heroForm.controls.name.hasError('required') && 
-                heroForm.controls.name.touched 
-            ) {
-                <mat-error>
-                    El nombre es obligatorio
-                </mat-error>
-            }
+      <input matInput formControlName="realName" placeholder="Ej: Clark Kent" />
 
-            @if (
-                heroForm.controls.name.hasError('minlength') &&
-                heroForm.controls.name.touched
-            ) {
-                <mat-error>
-                    El nombre debe tener al menos 2 caracteres
-                </mat-error>
-            }
-        </mat-form-field>
+      @if (heroForm.controls.realName.hasError('required') && heroForm.controls.realName.touched) {
+        <mat-error> El nombre real es obligatorio </mat-error>
+      }
+    </mat-form-field>
 
+    <!-- Franchise -->
+    <mat-form-field appearance="outline">
+      <mat-label>Franquicia</mat-label>
 
-        <!-- Real Name -->
-        <mat-form-field appearance="outline">
-            <mat-label>Nombre real</mat-label>
-
-            <input
-                matInput
-                formControlName="realName"
-                placeholder="Ej: Clark Kent"
-            />
-
-            @if (
-                heroForm.controls.realName.hasError('required') &&
-                heroForm.controls.realName.touched
-            ) {
-                <mat-error>
-                    El nombre real es obligatorio
-                </mat-error>
-            }
-        </mat-form-field>
-
-
-        <!-- Franchise -->
-        <mat-form-field appearance="outline">
-            <mat-label>Franquicia</mat-label>
-
-            <mat-select formControlName="franchise">
-            @for (franchise of franchises; track franchise) {
-                <mat-option [value]="franchise">
-                    <app-franchise-chip [franchise]="franchise"></app-franchise-chip>
-                </mat-option>
-            }
-            </mat-select>
-
-            @if (
-                heroForm.controls.franchise.hasError('required') &&
-                heroForm.controls.franchise.touched
-            ) {
-                <mat-error>
-                    Seleccioná una franquicia
-                </mat-error>
-            }
-        </mat-form-field>
-
-
-        <!-- Age -->
-        <mat-form-field appearance="outline">
-            <mat-label>Edad</mat-label>
-
-            <input
-                matInput
-                type="number"
-                formControlName="age"
-            />
-
-            @if (
-                heroForm.controls.age.invalid &&
-                heroForm.controls.age.touched
-            ) {
-                <mat-error>
-                    Ingresá una edad válida
-                </mat-error>
-            }
-        </mat-form-field>
-
-
-        <!-- Super powers -->
-        <mat-form-field
-            appearance="outline"
-            class="full-width"
-        >
-            <mat-label>Superpoderes</mat-label>
-
-            <mat-select
-                formControlName="superPowers"
-                multiple
-            >
-            @for (power of superPowers; track power.id) {
-                <mat-option [value]="power">
-                    <app-super-power-chip [superPower]="power"></app-super-power-chip>
-                </mat-option>
-            }
-            </mat-select>
-
-            @if (
-                heroForm.controls.superPowers.invalid &&
-                heroForm.controls.superPowers.touched
-            ) {
-            <mat-error>
-                Seleccioná al menos un superpoder
-            </mat-error>
-            }
-        </mat-form-field>
-
-
-        <!-- Description -->
-        <mat-form-field
-            appearance="outline"
-            class="full-width"
-        >
-            <mat-label>Descripción</mat-label>
-
-            <textarea
-                matInput
-                formControlName="description"
-                rows="4"
-                placeholder="Descripción del héroe..."
-            ></textarea>
-
-            <mat-hint align="end">
-                {{ heroForm.controls.description.value.length }}/500
-            </mat-hint>
-        </mat-form-field>
-
-    </div>
-
-
-    <div class="checkboxes">
-        <mat-checkbox formControlName="wearCape">
-            Usa capa
-        </mat-checkbox>
-
-        <mat-checkbox formControlName="fromEarth">
-            Es de la Tierra
-        </mat-checkbox>
-    </div>
-
-    <div class="icon-upload">
-
-        <input
-            #iconInput
-            type="file"
-            accept="image/png, image/webp"
-            hidden
-            (change)="onIconSelected($event)"
-        >
-
-        <button
-            mat-stroked-button
-            type="button"
-            [disabled]="viewMode()"
-            (click)="iconInput.click()"
-        >
-            <mat-icon>upload</mat-icon>
-            Cargar logo del héroe
-        </button>
-
-        @if(heroForm.controls.icon.value){
-            <img
-                [src]="heroForm.controls.icon.value"
-                alt="Logo de Héroe"
-                class="hero-icon-preview"
-            >
+      <mat-select formControlName="franchise">
+        @for (franchise of franchises; track franchise) {
+          <mat-option [value]="franchise">
+            <app-franchise-chip [franchise]="franchise"></app-franchise-chip>
+          </mat-option>
         }
+      </mat-select>
 
-        @if(heroForm.controls.icon.hasError('invalidFileType')){
-            <mat-error>
-                Solo se permiten imágenes png o webp.
-            </mat-error>
+      @if (
+        heroForm.controls.franchise.hasError('required') && heroForm.controls.franchise.touched
+      ) {
+        <mat-error> Seleccioná una franquicia </mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Age -->
+    <mat-form-field appearance="outline">
+      <mat-label>Edad</mat-label>
+
+      <input matInput type="number" formControlName="age" />
+
+      @if (heroForm.controls.age.invalid && heroForm.controls.age.touched) {
+        <mat-error> Ingresá una edad válida </mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Super powers -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Superpoderes</mat-label>
+
+      <mat-select formControlName="superPowers" multiple>
+        @for (power of superPowers; track power.id) {
+          <mat-option [value]="power">
+            <app-super-power-chip [superPower]="power"></app-super-power-chip>
+          </mat-option>
         }
-        @if(heroForm.controls.icon.hasError('fileTooLarge')){
-            <mat-error>
-                La imagen no puede superar los 2 MB.
-            </mat-error>
-        }
+      </mat-select>
 
-    </div>
+      @if (heroForm.controls.superPowers.invalid && heroForm.controls.superPowers.touched) {
+        <mat-error> Seleccioná al menos un superpoder </mat-error>
+      }
+    </mat-form-field>
 
+    <!-- Description -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descripción</mat-label>
 
-    @if(!viewMode()){
-        <div class="form-actions">
+      <textarea
+        matInput
+        formControlName="description"
+        rows="4"
+        placeholder="Descripción del héroe..."
+      ></textarea>
 
-            <button
-                mat-button
-                type="button"
-                (click)="cancel()"
-            >
-                Cancelar
-            </button>
+      <mat-hint align="end"> {{ heroForm.controls.description.value.length }}/500 </mat-hint>
+    </mat-form-field>
+  </div>
 
-            <button
-                mat-flat-button
-                type="submit"
-            >
-                <mat-icon>
-                    {{ isEditMode ? 'save' : 'add' }}
-                </mat-icon>
+  <div class="checkboxes">
+    <mat-checkbox formControlName="wearCape"> Usa capa </mat-checkbox>
 
-                {{ isEditMode ? 'Guardar cambios' : 'Agregar héroe' }}
-            </button>
+    <mat-checkbox formControlName="fromEarth"> Es de la Tierra </mat-checkbox>
+  </div>
 
-        </div>
+  <div class="icon-upload">
+    <input
+      #iconInput
+      type="file"
+      accept="image/png, image/webp"
+      hidden
+      (change)="onIconSelected($event)"
+    />
 
+    <button mat-stroked-button type="button" [disabled]="viewMode()" (click)="iconInput.click()">
+      <mat-icon>upload</mat-icon>
+      Cargar logo del héroe
+    </button>
+
+    @if (heroForm.controls.icon.value) {
+      <img [src]="heroForm.controls.icon.value" alt="Logo de Héroe" class="hero-icon-preview" />
     }
 
+    @if (heroForm.controls.icon.hasError('invalidFileType')) {
+      <mat-error> Solo se permiten imágenes png o webp. </mat-error>
+    }
+    @if (heroForm.controls.icon.hasError('fileTooLarge')) {
+      <mat-error> La imagen no puede superar los 2 MB. </mat-error>
+    }
+  </div>
+
+  @if (!viewMode()) {
+    <div class="form-actions">
+      <button mat-button type="button" (click)="cancel()">Cancelar</button>
+
+      <button mat-flat-button type="submit">
+        <mat-icon>
+          {{ isEditMode ? 'save' : 'add' }}
+        </mat-icon>
+
+        {{ isEditMode ? 'Guardar cambios' : 'Agregar héroe' }}
+      </button>
+    </div>
+  }
 </form>

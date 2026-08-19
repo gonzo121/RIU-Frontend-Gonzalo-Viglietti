@@ -12,8 +12,6 @@ export class HeroService {
 
   public heroes: Signal<Hero[]> = this._heroes.asReadonly();
 
-  constructor() {}
-
   /**
    * Adds a new hero to the list of heroes.
    * @param hero The hero to be added without id.
@@ -21,11 +19,14 @@ export class HeroService {
    */
   createHero(hero: CreateHero): Hero {
     const newHero: Hero = { ...hero, id: this.assignHeroId() };
-    this.heroes().some((existingHero) => this.isSameHeroName(existingHero, newHero))
-      ? (() => {
-          throw new Error('Hero with this name and real name already exists');
-        })()
-      : this._heroes.update((heroes) => [...heroes, newHero]);
+    const heroAlreadyExists = this.heroes().some((existingHero) =>
+      this.isSameHeroName(existingHero, newHero),
+    );
+
+    if (heroAlreadyExists) throw new Error('Hero with this name and real name already exists');
+
+    this._heroes.update((heroes) => [...heroes, newHero]);
+
     return newHero;
   }
 
@@ -46,7 +47,9 @@ export class HeroService {
    * @returns An array of heroes that match the filter.
    */
   filterHeroesByName(parcialName: string): Hero[] | [] {
-    return this._heroes().filter((hero) => normalizeText(hero.name).includes(normalizeText(parcialName)));
+    return this._heroes().filter((hero) =>
+      normalizeText(hero.name).includes(normalizeText(parcialName)),
+    );
   }
 
   /**
@@ -75,13 +78,16 @@ export class HeroService {
   updateHero(updatedHero: Hero): void {
     const existingHero = this._heroes().find((hero) => hero.id === updatedHero.id);
 
-    if(!existingHero) throw new Error('Hero not found');
-    
-    const isDuplicated = this._heroes().some((currentHero) => this.isSameHeroName(currentHero, updatedHero) && currentHero.id !== updatedHero.id);
-    if(isDuplicated) throw new Error('Hero with this name and real name already exists');
+    if (!existingHero) throw new Error('Hero not found');
+
+    const isDuplicated = this._heroes().some(
+      (currentHero) =>
+        this.isSameHeroName(currentHero, updatedHero) && currentHero.id !== updatedHero.id,
+    );
+    if (isDuplicated) throw new Error('Hero with this name and real name already exists');
 
     this._heroes.update((heroes) =>
-      heroes.map((hero) => (hero.id === updatedHero.id ? updatedHero : hero))
+      heroes.map((hero) => (hero.id === updatedHero.id ? updatedHero : hero)),
     );
   }
 
@@ -105,7 +111,9 @@ export class HeroService {
    * @returns A boolean indicating if the heroes are the same.
    */
   private isSameHeroName(hero1: Hero, hero2: Hero): boolean {
-    return normalizeText(hero1.name) === normalizeText(hero2.name) && normalizeText(hero1.realName) === normalizeText(hero2.realName);
+    return (
+      normalizeText(hero1.name) === normalizeText(hero2.name) &&
+      normalizeText(hero1.realName) === normalizeText(hero2.realName)
+    );
   }
-
 }

@@ -4,7 +4,6 @@ import { HeroCardList } from './hero-card-list';
 import { Hero } from '../../models/hero.model';
 
 describe('HeroCardList', () => {
-
   let component: HeroCardList;
   let fixture: ComponentFixture<HeroCardList>;
 
@@ -16,31 +15,25 @@ describe('HeroCardList', () => {
     observeMock = jest.fn();
     disconnectMock = jest.fn();
 
-    jest
-      .spyOn(globalThis, 'IntersectionObserver')
-      .mockImplementation(callback => {
+    jest.spyOn(globalThis, 'IntersectionObserver').mockImplementation((callback) => {
+      intersectionCallback = callback;
 
-        intersectionCallback = callback;
+      return {
+        observe: observeMock,
+        unobserve: jest.fn(),
+        disconnect: disconnectMock,
+      } as unknown as IntersectionObserver;
+    });
+  };
 
-        return {
-          observe: observeMock,
-          unobserve: jest.fn(),
-          disconnect: disconnectMock,
-        } as unknown as IntersectionObserver;
-
-      })
-    };
-  
-  const triggerIntersection = (
-    isIntersecting: boolean
-  ): void => {
+  const triggerIntersection = (isIntersecting: boolean): void => {
     intersectionCallback(
       [
         {
-          isIntersecting
-        } as IntersectionObserverEntry
+          isIntersecting,
+        } as IntersectionObserverEntry,
       ],
-      {} as IntersectionObserver
+      {} as IntersectionObserver,
     );
   };
 
@@ -54,19 +47,16 @@ describe('HeroCardList', () => {
     age: 30,
     wearCape: true,
     fromEarth: true,
-    icon: ''
+    icon: '',
   });
 
-  const heroes: Hero[] = Array.from(
-    { length: 12 },
-    (_, index) => createHero(index + 1)
-  );
+  const heroes: Hero[] = Array.from({ length: 12 }, (_, index) => createHero(index + 1));
 
   beforeEach(async () => {
     mockIntersectionObserver();
 
     await TestBed.configureTestingModule({
-      imports: [HeroCardList]
+      imports: [HeroCardList],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeroCardList);
@@ -146,7 +136,7 @@ describe('HeroCardList', () => {
   });
 
   it('should reset visible heroes when heroes input changes', () => {
-    triggerIntersection(true)
+    triggerIntersection(true);
     fixture.detectChanges();
 
     let cards = fixture.nativeElement.querySelectorAll('.hero-card');
@@ -160,7 +150,7 @@ describe('HeroCardList', () => {
       createHero(23),
       createHero(24),
       createHero(25),
-      createHero(26)
+      createHero(26),
     ];
 
     fixture.componentRef.setInput('heroes', filteredHeroes);
@@ -170,7 +160,7 @@ describe('HeroCardList', () => {
     cards = fixture.nativeElement.querySelectorAll('.hero-card');
 
     expect(cards.length).toBe(5);
-  })
+  });
 
   it('should emit hero when view button is clicked', () => {
     const viewSpy = jest.fn();
@@ -207,11 +197,12 @@ describe('HeroCardList', () => {
 
     const firstCard: HTMLElement = fixture.nativeElement.querySelector('.hero-card');
 
-    const deleteButton: HTMLButtonElement = firstCard.querySelector('[aria-label="Eliminar héroe"]')!;
+    const deleteButton: HTMLButtonElement = firstCard.querySelector(
+      '[aria-label="Eliminar héroe"]',
+    )!;
 
     deleteButton.click();
 
     expect(deleteSpy).toHaveBeenCalledWith(heroes[0]);
   });
-
 });

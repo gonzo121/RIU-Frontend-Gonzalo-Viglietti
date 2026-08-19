@@ -99,7 +99,7 @@ describe('HeroTable', () => {
       fromEarth: false,
       icon: 'assets/wonder-woman.png',
     },
-  ]
+  ];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -122,9 +122,7 @@ describe('HeroTable', () => {
   it('should display table headers', () => {
     const headers: HTMLElement[] = Array.from(fixture.nativeElement.querySelectorAll('th'));
 
-    const headersText = headers.map(
-      header => header.textContent.trim()
-    );
+    const headersText = headers.map((header) => header.textContent.trim());
 
     expect(headersText).toEqual([
       '',
@@ -151,7 +149,7 @@ describe('HeroTable', () => {
     expect(firstRow.textContent).toContain('Superman');
     expect(firstRow.textContent).toContain('Clark Kent');
     expect(firstRow.textContent).toContain('35');
-  })
+  });
 
   it('should display hero icon when hero has an icon', () => {
     const firstRow: HTMLElement = fixture.nativeElement.querySelector('tr.mat-mdc-row');
@@ -163,7 +161,7 @@ describe('HeroTable', () => {
 
   it('should display "-" when hero has no icon', () => {
     const rows: NodeListOf<HTMLElement> = fixture.nativeElement.querySelectorAll('tr.mat-mdc-row');
-   
+
     const secondRow = rows[1];
 
     expect(secondRow.textContent).toContain('-');
@@ -243,7 +241,9 @@ describe('HeroTable', () => {
 
     const firstRow: HTMLElement = fixture.nativeElement.querySelector('tr.mat-mdc-row');
 
-    const deleteButton: HTMLButtonElement = firstRow.querySelector('[aria-label="Eliminar héroe"]')!;
+    const deleteButton: HTMLButtonElement = firstRow.querySelector(
+      '[aria-label="Eliminar héroe"]',
+    )!;
 
     deleteButton.click();
 
@@ -251,8 +251,7 @@ describe('HeroTable', () => {
   });
 
   it('should display the next page when paginator changes page', () => {
-    const paginator = fixture.debugElement
-      .query(By.directive(MatPaginator))
+    const paginator = fixture.debugElement.query(By.directive(MatPaginator))
       .componentInstance as MatPaginator;
 
     const event: PageEvent = {
@@ -269,12 +268,10 @@ describe('HeroTable', () => {
 
     expect(rows.length).toBe(1);
     expect(rows[0].textContent).toContain('Wonder Woman');
-
   });
 
   it('should change the number of displayed heroes when page size changes', () => {
-    const paginator = fixture.debugElement
-      .query(By.directive(MatPaginator))
+    const paginator = fixture.debugElement.query(By.directive(MatPaginator))
       .componentInstance as MatPaginator;
 
     const event: PageEvent = {
@@ -290,7 +287,7 @@ describe('HeroTable', () => {
     const rows: NodeListOf<HTMLElement> = fixture.nativeElement.querySelectorAll('tr.mat-mdc-row');
 
     expect(rows.length).toBe(6);
-  })
+  });
 
   it('should display no data message when heroes array is empty', () => {
     fixture.componentRef.setInput('heroes', []);
@@ -302,8 +299,6 @@ describe('HeroTable', () => {
 
     expect(noDataRow).toBeTruthy();
 
-    expect(noDataRow?.textContent).toContain(
-      'No hay datos para mostrar para el valor "flash"'
-    )
-  })
+    expect(noDataRow?.textContent).toContain('No hay datos para mostrar para el valor "flash"');
+  });
 });

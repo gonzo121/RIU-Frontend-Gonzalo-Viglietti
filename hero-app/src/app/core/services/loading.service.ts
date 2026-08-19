@@ -4,25 +4,19 @@ import { computed, Injectable, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class LoadingService {
-
   private readonly pendingOperatios = signal(0);
 
-  readonly isLoading = computed(
-    () => this.pendingOperatios() > 0
-  );
+  readonly isLoading = computed(() => this.pendingOperatios() > 0);
 
   show(): void {
-    this.pendingOperatios.update(value => value + 1);
+    this.pendingOperatios.update((value) => value + 1);
   }
 
   hide(): void {
-    this.pendingOperatios.update(value => Math.max(0, value - 1));
+    this.pendingOperatios.update((value) => Math.max(0, value - 1));
   }
 
-  async run<T>(
-    operation: () => T | Promise<T>,
-    minDuration = 0
-  ): Promise<T> {
+  async run<T>(operation: () => T | Promise<T>, minDuration = 0): Promise<T> {
     this.show();
 
     const start = performance.now();
@@ -33,18 +27,13 @@ export class LoadingService {
       const elapsed = performance.now() - start;
       const remaining = minDuration - elapsed;
 
-      if(remaining > 0) {
-        await new Promise(resolve => 
-          setTimeout(resolve, remaining)
-        )
+      if (remaining > 0) {
+        await new Promise((resolve) => setTimeout(resolve, remaining));
       }
-      
-      return result;
 
+      return result;
     } finally {
       this.hide();
     }
-
   }
-
 }

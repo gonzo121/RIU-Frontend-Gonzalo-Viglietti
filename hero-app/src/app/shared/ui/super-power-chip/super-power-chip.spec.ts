@@ -48,12 +48,12 @@ describe('SuperPowerChip', () => {
       icon: '',
     };
 
-    fixture.componentRef.setInput('superPower', superPowerWithoutIcon)
+    fixture.componentRef.setInput('superPower', superPowerWithoutIcon);
 
     fixture.detectChanges();
 
     const icon = fixture.nativeElement.querySelector('super-power-icon');
 
     expect(icon).toBeNull();
-  })
+  });
 });

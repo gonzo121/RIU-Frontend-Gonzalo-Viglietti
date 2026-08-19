@@ -4,12 +4,9 @@ import { LoadingSpinner } from './shared/components/loading-spinner/loading-spin
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    LoadingSpinner
-  ],
+  imports: [RouterOutlet, LoadingSpinner],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
   protected readonly title = signal('hero-app');

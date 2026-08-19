@@ -1,12 +1,12 @@
-.loading-overlay{
-    position: fixed;
-    inset: 0;
+.loading-overlay {
+  position: fixed;
+  inset: 0;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    background: rgba($color: #000000, $alpha: 0.25);
+  background: rgba($color: #000000, $alpha: 0.25);
 
-    z-index: 9999;
+  z-index: 9999;
 }

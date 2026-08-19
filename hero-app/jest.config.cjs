@@ -1,6 +1,4 @@
-const {
-  createCjsPreset,
-} = require('jest-preset-angular/presets/index.js');
+const { createCjsPreset } = require('jest-preset-angular/presets/index.js');
 
 module.exports = {
   ...createCjsPreset(),
@@ -9,11 +7,7 @@ module.exports = {
 
   testMatch: ['**/*.spec.ts'],
 
-  collectCoverageFrom: [
-    'src/**/*.ts',
-    '!src/**/*.spec.ts',
-    '!src/main.ts',
-  ],
+  collectCoverageFrom: ['src/**/*.ts', '!src/**/*.spec.ts', '!src/main.ts'],
 
   coverageDirectory: 'coverage',
 

@@ -12,7 +12,7 @@ describe('LoadingSpinner', () => {
 
   const loadingServiceMock = {
     isLoading,
-  }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -21,8 +21,8 @@ describe('LoadingSpinner', () => {
         {
           provide: LoadingService,
           useValue: loadingServiceMock,
-        }
-      ]
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoadingSpinner);
@@ -69,5 +69,5 @@ describe('LoadingSpinner', () => {
     fixture.detectChanges();
 
     expect(fixture.nativeElement.querySelector('mat-spinner')).toBeNull();
-  })
+  });
 });

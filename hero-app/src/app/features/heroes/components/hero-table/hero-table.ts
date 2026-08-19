@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, output, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,7 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { Hero } from '../../models/hero.model';
 import { MatChipsModule } from '@angular/material/chips';
 import { SuperPowerChip } from '../../../../shared/ui/super-power-chip/super-power-chip';
-import { UppercaseDirective } from "../../../../shared/directives/uppercase.directive";
+import { UppercaseDirective } from '../../../../shared/directives/uppercase.directive';
 import { FranchiseChip } from '../../../../shared/ui/franchise-chip/franchise-chip';
 import { LoadingService } from '../../../../core/services/loading.service';
 
@@ -24,8 +32,8 @@ import { LoadingService } from '../../../../core/services/loading.service';
     MatChipsModule,
     SuperPowerChip,
     UppercaseDirective,
-    FranchiseChip
-],
+    FranchiseChip,
+  ],
   templateUrl: './hero-table.html',
   styleUrl: './hero-table.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -61,16 +69,9 @@ export class HeroTable {
   });
 
   protected async onPageChange(event: PageEvent): Promise<void> {
-    await this.loadingService.run(
-      () => {
-        this.pageIndex.set(event.pageIndex);
-        this.pageSize.set(event.pageSize);
-      }, 200
-    );
-
+    await this.loadingService.run(() => {
+      this.pageIndex.set(event.pageIndex);
+      this.pageSize.set(event.pageSize);
+    }, 200);
   }
-
-
-
-
 }

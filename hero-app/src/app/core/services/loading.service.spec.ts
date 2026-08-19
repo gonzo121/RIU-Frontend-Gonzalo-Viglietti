@@ -13,7 +13,7 @@ describe('LoadingService', () => {
   afterEach(() => {
     jest.restoreAllMocks();
     jest.useRealTimers();
-  })
+  });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
@@ -76,8 +76,8 @@ describe('LoadingService', () => {
     it('should activate loading while operation is running', async () => {
       let resolveOperation!: (value: string) => void;
 
-      const operation = () => 
-        new Promise<string>(resolve => {
+      const operation = () =>
+        new Promise<string>((resolve) => {
           resolveOperation = resolve;
         });
 
@@ -89,23 +89,19 @@ describe('LoadingService', () => {
 
       await promise;
 
-      expect(service.isLoading()).toBe(false);      
+      expect(service.isLoading()).toBe(false);
     });
 
     it('should stop loading after operation completes', async () => {
       await service.run(async () => 'success');
 
       expect(service.isLoading()).toBe(false);
-    })
+    });
 
     it('should stop loading even if operation throws an error', async () => {
-      const operation = jest.fn().mockRejectedValue(
-        new Error('Algo salio mal')
-      );
+      const operation = jest.fn().mockRejectedValue(new Error('Algo salio mal'));
 
-      await expect(service.run(operation)).rejects.toThrow(
-        'Algo salio mal'
-      );
+      await expect(service.run(operation)).rejects.toThrow('Algo salio mal');
 
       expect(service.isLoading()).toBe(false);
     });
@@ -113,25 +109,22 @@ describe('LoadingService', () => {
     it('should respect the minimun duration', async () => {
       jest.useFakeTimers();
 
-      jest.spyOn(performance, 'now')
-        .mockReturnValueOnce(0)
-        .mockReturnValueOnce(100);
+      jest.spyOn(performance, 'now').mockReturnValueOnce(0).mockReturnValueOnce(100);
 
-        const operation = jest.fn().mockResolvedValue('success');
+      const operation = jest.fn().mockResolvedValue('success');
 
-        const promise = service.run(operation, 500);
+      const promise = service.run(operation, 500);
 
-        await Promise.resolve();
+      await Promise.resolve();
 
-        expect(service.isLoading()).toBe(true);
+      expect(service.isLoading()).toBe(true);
 
-        await jest.advanceTimersByTimeAsync(400);
+      await jest.advanceTimersByTimeAsync(400);
 
-        const result = await promise;
+      const result = await promise;
 
-        expect(result).toBe('success');
-        expect(service.isLoading()).toBe(false);
+      expect(result).toBe('success');
+      expect(service.isLoading()).toBe(false);
     });
-
   });
-}); 
+});

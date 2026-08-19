@@ -5,7 +5,6 @@ import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { SUPER_POWERS } from '../../data/powers.data';
 import { CreateHero, Hero } from '../../models/hero.model';
 import { By } from '@angular/platform-browser';
-import { createComponent } from '@angular/core';
 
 describe('HeroForm', () => {
   let component: HeroForm;
@@ -23,27 +22,25 @@ describe('HeroForm', () => {
     age: 40,
     wearCape: true,
     fromEarth: true,
-    icon: ''
+    icon: '',
   };
 
   const existingHero: Hero = {
     id: 1,
-    ...validHero
+    ...validHero,
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HeroForm],
-    }).compileComponents()
-    
-
+    }).compileComponents();
   });
 
   const createComponent = (hero?: Hero): void => {
     fixture = TestBed.createComponent(HeroForm);
     component = fixture.componentInstance;
-  
-    if(hero) fixture.componentRef.setInput('hero', hero);
+
+    if (hero) fixture.componentRef.setInput('hero', hero);
 
     fixture.detectChanges();
 
@@ -51,7 +48,6 @@ describe('HeroForm', () => {
 
     form = formDebugElement.injector.get(FormGroupDirective).form;
   };
-
 
   it('should create', () => {
     createComponent();
@@ -70,7 +66,7 @@ describe('HeroForm', () => {
       age: 1,
       wearCape: false,
       fromEarth: true,
-      icon: ''
+      icon: '',
     });
   });
 
@@ -88,7 +84,6 @@ describe('HeroForm', () => {
     nameControl?.setValue('');
 
     expect(nameControl?.hasError('required')).toBe(true);
-
   });
 
   it('should require hero name to have at least 2 characters', () => {
@@ -152,7 +147,7 @@ describe('HeroForm', () => {
 
     formElement.triggerEventHandler('ngSubmit');
 
-    Object.values(form.controls).forEach(control => {
+    Object.values(form.controls).forEach((control) => {
       expect(control.touched).toBe(true);
     });
   });
@@ -208,7 +203,7 @@ describe('HeroForm', () => {
     component.updateRequested.subscribe(updateSpy);
 
     form.patchValue({
-      name: 'Batman Updated'
+      name: 'Batman Updated',
     });
 
     const formElement = fixture.debugElement.query(By.css('form'));
@@ -217,7 +212,7 @@ describe('HeroForm', () => {
 
     expect(updateSpy).toHaveBeenCalledWith({
       ...validHero,
-      name: 'Batman Updated'
+      name: 'Batman Updated',
     });
     expect(createSpy).not.toHaveBeenCalled();
   });
@@ -229,7 +224,9 @@ describe('HeroForm', () => {
 
     component.cancelRequested.subscribe(cancelSpy);
 
-    const backButton: HTMLButtonElement = fixture.nativeElement.querySelector('button[aria-label="Volver"]');
+    const backButton: HTMLButtonElement = fixture.nativeElement.querySelector(
+      'button[aria-label="Volver"]',
+    );
 
     backButton.click();
 
@@ -239,53 +236,36 @@ describe('HeroForm', () => {
   it('should reject unsupported icon file types', () => {
     createComponent();
 
-    const file = new File(
-      ['image'],
-      'batman.jpg',
-      { type: 'image/jpeg' }
-    );
+    const file = new File(['image'], 'batman.jpg', { type: 'image/jpeg' });
 
     const input: HTMLInputElement = fixture.nativeElement.querySelector('input[type="file"]');
 
     Object.defineProperty(input, 'files', {
       value: [file],
-      configurable: true
+      configurable: true,
     });
 
-    input.dispatchEvent(
-      new Event('change', {bubbles: true})
-    );
+    input.dispatchEvent(new Event('change', { bubbles: true }));
 
-    expect(
-      form.get('icon')?.hasError('invalidFileType')
-    ).toBe(true);
+    expect(form.get('icon')?.hasError('invalidFileType')).toBe(true);
   });
 
   it('should reject icon files larger than 2 MB', () => {
     createComponent();
 
-    const largeFile = new File(
-      [new Uint8Array(2 * 1024 * 1024 + 1)],
-      'batman.png',
-      {type: 'image/png'}
-    );
+    const largeFile = new File([new Uint8Array(2 * 1024 * 1024 + 1)], 'batman.png', {
+      type: 'image/png',
+    });
 
     const input: HTMLInputElement = fixture.nativeElement.querySelector('input[type="file"]');
 
     Object.defineProperty(input, 'files', {
       value: [largeFile],
-      configurable: true
+      configurable: true,
     });
 
-    input.dispatchEvent(
-      new Event('change', {bubbles: true})
-    );
+    input.dispatchEvent(new Event('change', { bubbles: true }));
 
-    expect(
-      form.get('icon')?.hasError('fileTooLarge')
-    ).toBe(true);
+    expect(form.get('icon')?.hasError('fileTooLarge')).toBe(true);
   });
-
 });
-
-
