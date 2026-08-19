@@ -4,12 +4,10 @@ import { LoadingService } from '../../../core/services/loading.service';
 
 @Component({
   selector: 'app-loading-spinner',
-  imports: [
-    MatProgressSpinnerModule
-  ],
+  imports: [MatProgressSpinnerModule],
   templateUrl: './loading-spinner.html',
   styleUrl: './loading-spinner.scss',
 })
 export class LoadingSpinner {
-  protected readonly loadingService = inject(LoadingService)
+  protected readonly loadingService = inject(LoadingService);
 }

@@ -7,16 +7,14 @@ import { LoadingService } from '../../../../core/services/loading.service';
 
 @Component({
   selector: 'app-hero-form-page',
-  imports: [
-    HeroForm,
-  ],
+  imports: [HeroForm],
   templateUrl: './hero-form-page.html',
   styleUrl: './hero-form-page.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeroFormPage implements OnInit{
+export class HeroFormPage implements OnInit {
   private readonly heroService = inject(HeroService);
-  private readonly loadingService = inject(LoadingService)
+  private readonly loadingService = inject(LoadingService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   protected hero: Hero | undefined;
@@ -28,13 +26,13 @@ export class HeroFormPage implements OnInit{
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
 
-    if(!id){
-      return
+    if (!id) {
+      return;
     }
 
     this.isEditMode.set(this.router.url.endsWith('/edit'));
-    
-    if(!this.isEditMode()) this.isViewMode.set(true);
+
+    if (!this.isEditMode()) this.isViewMode.set(true);
 
     this.heroId = Number(id);
 
@@ -42,39 +40,30 @@ export class HeroFormPage implements OnInit{
   }
 
   protected async createHero(hero: CreateHero): Promise<void> {
-    await this.loadingService.run(
-      () => this.heroService.createHero(hero), 400
-    );
-
+    await this.loadingService.run(() => this.heroService.createHero(hero), 400);
 
     this.router.navigate(['/heroes']);
   }
 
   protected async updateHero(hero: CreateHero): Promise<void> {
-    if(this.heroId === null) return;
-    
+    if (this.heroId === null) return;
 
     const updateHero: Hero = {
       id: this.heroId,
-      ...hero
-    }
+      ...hero,
+    };
 
-    await this.loadingService.run(
-      () => this.heroService.updateHero(updateHero), 400
-    );
+    await this.loadingService.run(() => this.heroService.updateHero(updateHero), 400);
 
-    this.router.navigate(['/heroes'])
+    this.router.navigate(['/heroes']);
   }
 
   protected cancel(): void {
     this.router.navigate(['/heroes']);
   }
 
-  protected async redirectToEdit(heroId: number): Promise<void>{
-    await this.loadingService.run(
-      () => this.isViewMode.set(false), 400
-    );
-    this.router.navigate(['/heroes', heroId, 'edit'])
-
+  protected async redirectToEdit(heroId: number): Promise<void> {
+    await this.loadingService.run(() => this.isViewMode.set(false), 400);
+    this.router.navigate(['/heroes', heroId, 'edit']);
   }
 }

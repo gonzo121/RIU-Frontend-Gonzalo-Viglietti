@@ -3,14 +3,11 @@ import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-franchise-chip',
-  imports: [
-    MatChipsModule
-  ],
+  imports: [MatChipsModule],
   templateUrl: './franchise-chip.html',
   styleUrl: './franchise-chip.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FranchiseChip {
   readonly franchise = input.required<string>();
 }
-

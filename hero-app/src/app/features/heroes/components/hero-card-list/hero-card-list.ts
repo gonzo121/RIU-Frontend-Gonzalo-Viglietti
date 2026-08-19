@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, output, signal, viewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  output,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -16,11 +27,11 @@ import { LoadingService } from '../../../../core/services/loading.service';
     MatIconModule,
     MatChipsModule,
     SuperPowerChip,
-    UppercaseDirective
+    UppercaseDirective,
   ],
   templateUrl: './hero-card-list.html',
   styleUrl: './hero-card-list.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroCardList {
   private readonly loadingService = inject(LoadingService);
@@ -42,24 +53,22 @@ export class HeroCardList {
 
   private readonly scrollEffect = effect((onCleanup) => {
     const sentinel = this.scrollSentinel();
-    if(!sentinel) return;
+    if (!sentinel) return;
 
     const observer = new IntersectionObserver(
-      entries => {
-        if(entries[0].isIntersecting){
-          this.loadingService.run(
-            () => this.loadMore(), 400
-          )
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          this.loadingService.run(() => this.loadMore(), 400);
         }
       },
       {
-        rootMargin: '100px'
-      }
+        rootMargin: '100px',
+      },
     );
 
     observer.observe(sentinel.nativeElement);
 
-    onCleanup(() => observer.disconnect)
+    onCleanup(() => observer.disconnect);
   });
 
   private readonly resetScrollEffect = effect(() => {
@@ -69,12 +78,8 @@ export class HeroCardList {
   });
 
   private loadMore(): void {
-    if(!this.hasMoreHeroes) return;
+    if (!this.hasMoreHeroes) return;
 
-    this.visibleAmount.update(
-      current => Math.min(current + 5, this.heroes().length)
-    );
+    this.visibleAmount.update((current) => Math.min(current + 5, this.heroes().length));
   }
-
-
 }

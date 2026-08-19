@@ -24,11 +24,11 @@ import { SuperPowerChip } from '../../../../shared/ui/super-power-chip/super-pow
     MatInputModule,
     UppercaseDirective,
     SuperPowerChip,
-    FranchiseChip
+    FranchiseChip,
   ],
   templateUrl: './hero-form.html',
   styleUrl: './hero-form.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroForm {
   private readonly fb = inject(FormBuilder);
@@ -39,82 +39,41 @@ export class HeroForm {
   readonly cancelRequested = output();
   readonly updateRequested = output<CreateHero>();
   readonly editRequested = output<number>();
-  
+
   protected readonly superPowers = Object.values(SUPER_POWERS);
 
-  protected readonly franchises = [
-    'Marvel Comics',
-    'DC Comics'
-  ]
+  protected readonly franchises = ['Marvel Comics', 'DC Comics'];
 
-  private readonly allowedIconTypes = [
-    'image/png',
-    'image/webp'
-  ]
+  private readonly allowedIconTypes = ['image/png', 'image/webp'];
 
-  private readonly maxIconSize = 2 * 1024 * 1024
+  private readonly maxIconSize = 2 * 1024 * 1024;
 
-
-  protected readonly heroForm =this.fb.nonNullable.group({
-    name: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(50),
-      ]
-    ],    
-    realName: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(50),
-      ]
-    ],
-    franchise: [
-      '',
-      [
-        Validators.required,
-      ]
-    ],
-    description: [
-      '',
-      [
-        Validators.required,
-        Validators.maxLength(500),
-      ]
-    ],
-    superPowers: [
-      [] as SuperHeroPower[],
-      Validators.required
-    ],
-    age: [
-      1,
-      [
-        Validators.required,
-        Validators.min(1)
-      ]
-    ],
+  protected readonly heroForm = this.fb.nonNullable.group({
+    name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+    realName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+    franchise: ['', [Validators.required]],
+    description: ['', [Validators.required, Validators.maxLength(500)]],
+    superPowers: [[] as SuperHeroPower[], Validators.required],
+    age: [1, [Validators.required, Validators.min(1)]],
     wearCape: [false],
     fromEarth: [true],
-    icon: ['']
+    icon: [''],
   });
 
   private readonly heroEffect = effect(() => {
     const hero = this.hero();
     const viewMode = this.viewMode();
 
-    if(hero){
+    if (hero) {
       this.heroForm.patchValue(hero);
     }
 
-    if(viewMode){
+    if (viewMode) {
       this.heroForm.disable();
     } else {
       this.heroForm.enable();
     }
-  })
+  });
 
   protected get isEditMode(): boolean {
     return this.hero() !== undefined && !this.viewMode();
@@ -124,20 +83,20 @@ export class HeroForm {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
 
-    if(!file) return;
+    if (!file) return;
 
-    if(!this.allowedIconTypes.includes(file.type)){
+    if (!this.allowedIconTypes.includes(file.type)) {
       this.heroForm.controls.icon.setErrors({
-        invalidFileType: true
-      })
+        invalidFileType: true,
+      });
 
       return;
     }
 
-    if(file.size > this.maxIconSize) {
+    if (file.size > this.maxIconSize) {
       this.heroForm.controls.icon.setErrors({
-        fileTooLarge: true
-      })
+        fileTooLarge: true,
+      });
 
       return;
     }
@@ -149,20 +108,20 @@ export class HeroForm {
 
       this.heroForm.controls.icon.setValue(icon);
       this.heroForm.controls.icon.markAsDirty();
-    }
+    };
 
     reader.readAsDataURL(file);
   }
 
   protected saveHero(): void {
-    if(this.heroForm.invalid){
+    if (this.heroForm.invalid) {
       this.heroForm.markAllAsTouched();
       return;
     }
 
     const formValue = this.heroForm.getRawValue();
 
-    if(this.isEditMode) {
+    if (this.isEditMode) {
       this.updateHero(formValue);
       return;
     }
@@ -181,5 +140,4 @@ export class HeroForm {
   protected cancel(): void {
     this.cancelRequested.emit();
   }
-
 }

@@ -1,79 +1,73 @@
 .page-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
 
-    margin-bottom: 24px;
+  margin-bottom: 24px;
 
-    h1 {
-        margin: 0;
+  h1 {
+    margin: 0;
 
-        font-size: 2rem;
-        font-weight: 600;
-    }
+    font-size: 2rem;
+    font-weight: 600;
+  }
 
-    p {
-        margin: 6px 0 0;
+  p {
+    margin: 6px 0 0;
 
-        opacity: 0.65;
-    }
+    opacity: 0.65;
+  }
 }
 
-
 .hero-form {
-    padding: 32px;
+  padding: 32px;
 
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
 
-    background: var(--mat-sys-surface);
+  background: var(--mat-sys-surface);
 
-    .form-grid {
-        display: grid;
+  .form-grid {
+    display: grid;
 
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
-        gap: 12px 20px;
+    gap: 12px 20px;
 
-        .full-width {
-            grid-column: 1 / -1;
-        }
-
+    .full-width {
+      grid-column: 1 / -1;
     }
+  }
 
-    .checkboxes {
-        display: flex;
-        gap: 32px;
+  .checkboxes {
+    display: flex;
+    gap: 32px;
 
-        margin-top: 16px;
+    margin-top: 16px;
+  }
+
+  .icon-upload {
+    margin-top: 32px;
+    padding-top: 24px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    .hero-icon-preview {
+      height: 3rem;
     }
+  }
 
-    .icon-upload{
-        margin-top: 32px;
-        padding-top: 24px;
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
 
-        display: flex;
-        align-items: center;
+    margin-top: 32px;
+    padding-top: 24px;
 
-        gap: 12px;
-
-        .hero-icon-preview{
-            height: 3rem;
-        }
-
-    }
-
-
-    .form-actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 12px;
-
-        margin-top: 32px;
-        padding-top: 24px;
-
-        border-top: 1px solid rgba(0, 0, 0, 0.08);
-    }
-
-
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
 }

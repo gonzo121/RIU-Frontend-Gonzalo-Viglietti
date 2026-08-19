@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeroesPage } from './heroes-page';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Hero } from '../../models/hero.model';
-import { of, Subject } from 'rxjs';
+import { of } from 'rxjs';
 import { HeroService } from '../../services/hero';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialog, ConfirmDialogData } from '../../../../shared/components/confirm-dialog/confirm-dialog';
+import { ConfirmDialog } from '../../../../shared/components/confirm-dialog/confirm-dialog';
 
 describe('HeroesPage', () => {
   let component: HeroesPage;
@@ -72,9 +72,7 @@ describe('HeroesPage', () => {
     };
 
     loadingServiceMock = {
-      run: jest.fn().mockImplementation(
-        async (operation: () => unknown) => operation()
-      ),
+      run: jest.fn().mockImplementation(async (operation: () => unknown) => operation()),
       hide: jest.fn(),
       show: jest.fn(),
     };
@@ -100,26 +98,24 @@ describe('HeroesPage', () => {
         },
       ],
     }).compileComponents();
-    
+
     TestBed.overrideProvider(MatDialog, {
       useValue: dialogMock,
     });
 
     await TestBed.compileComponents();
-
   });
 
   afterEach(() => {
     fixture?.destroy();
     jest.useRealTimers();
-  })
+  });
 
   const createComponent = () => {
     fixture = TestBed.createComponent(HeroesPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }
-  
+  };
 
   it('should create', () => {
     createComponent();
@@ -209,22 +205,18 @@ describe('HeroesPage', () => {
 
     component.deleteHero(heroes[0]);
 
-    expect(dialogMock.open).toHaveBeenCalledWith(
-      ConfirmDialog, 
-      {
-        width: '400px',
-        maxWidth: '90vw',
-        data: {
-          title: 'Eliminar héroe',
-          message:
-            '¿Estás seguro de que deseas eliminar a Batman?',
-          confirm: {
-            icon: 'delete',
-            text: 'Eliminar',
-          },
+    expect(dialogMock.open).toHaveBeenCalledWith(ConfirmDialog, {
+      width: '400px',
+      maxWidth: '90vw',
+      data: {
+        title: 'Eliminar héroe',
+        message: '¿Estás seguro de que deseas eliminar a Batman?',
+        confirm: {
+          icon: 'delete',
+          text: 'Eliminar',
         },
-      }
-    );
+      },
+    });
   });
 
   it('should delete hero when deletion is confirmed', () => {
@@ -262,9 +254,9 @@ describe('HeroesPage', () => {
 
     const event = {
       target: {
-        value: 'bat'
-      }
-    } as unknown as Event
+        value: 'bat',
+      },
+    } as unknown as Event;
 
     component['onSearchTermChange'](event);
 
@@ -277,5 +269,5 @@ describe('HeroesPage', () => {
     expect(loadingServiceMock.hide).toHaveBeenCalled();
 
     jest.useRealTimers();
-  })
+  });
 });

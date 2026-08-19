@@ -6,23 +6,17 @@ import { MatIconModule } from '@angular/material/icon';
 export interface ConfirmDialogData {
   title: string;
   message: string;
-  confirm?: { icon?:string, text?: string };
+  confirm?: { icon?: string; text?: string };
   cancelText?: string;
 }
 
 @Component({
   selector: 'app-confirm-dialog',
-  imports: [
-    MatDialogModule,
-    MatButtonModule,
-    MatIconModule
-  ],
+  imports: [MatDialogModule, MatButtonModule, MatIconModule],
   templateUrl: './confirm-dialog.html',
   styleUrl: './confirm-dialog.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
-  
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmDialog {
-
-  protected readonly data = inject<ConfirmDialogData>(MAT_DIALOG_DATA)
+  protected readonly data = inject<ConfirmDialogData>(MAT_DIALOG_DATA);
 }

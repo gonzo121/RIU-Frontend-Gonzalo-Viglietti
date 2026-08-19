@@ -3,25 +3,24 @@ import { setupZonelessTestEnv } from 'jest-preset-angular/setup-env/zoneless';
 setupZonelessTestEnv();
 
 class IntersectionObserverMock {
-    readonly root = null;
-    readonly rootMargin = '';
-    readonly thresholds = [];
-    readonly scrollMargin = '';
+  readonly root = null;
+  readonly rootMargin = '';
+  readonly thresholds = [];
+  readonly scrollMargin = '';
 
+  observe(): void {}
 
-    observe(): void {}
+  unobserve(): void {}
 
-    unobserve(): void {}
+  disconnect(): void {}
 
-    disconnect(): void {}
-
-    takeRecords(): IntersectionObserverEntry[] {
-        return [];
-    }
+  takeRecords(): IntersectionObserverEntry[] {
+    return [];
+  }
 }
 
 Object.defineProperty(globalThis, 'IntersectionObserver', {
-    writable: true,
-    configurable: true,
-    value: IntersectionObserverMock
+  writable: true,
+  configurable: true,
+  value: IntersectionObserverMock,
 });

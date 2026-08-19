@@ -7,20 +7,21 @@ import { SUPER_POWERS } from '../data/powers.data';
 describe('HeroService', () => {
   let service: HeroService;
 
-  const createHero = (
-    overrides: Partial<CreateHero> = {},
-  ): CreateHero => ({
+  const createHero = (overrides: Partial<CreateHero> = {}): CreateHero => ({
     name: 'Spider-Man',
     realName: 'Miles Morales',
     franchise: 'Marvel Comics',
     description: 'The new Spider-Man',
-    superPowers: [SUPER_POWERS.WALL_CRAWLING, SUPER_POWERS.SPIDER_SENSE, SUPER_POWERS.CONTROL_LIGHTNING],
+    superPowers: [
+      SUPER_POWERS.WALL_CRAWLING,
+      SUPER_POWERS.SPIDER_SENSE,
+      SUPER_POWERS.CONTROL_LIGHTNING,
+    ],
     age: 15,
     wearCape: false,
     fromEarth: true,
     ...overrides,
   });
-
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -42,14 +43,9 @@ describe('HeroService', () => {
   });
 
   it('should filter heroes comparing a string with their names', () => {
-    
     const filteredHeroes = service.filterHeroesByName('man');
-    
-    expect(
-      filteredHeroes.every((hero) =>
-        hero.name.toLowerCase().includes('man'),
-      ),
-    ).toBe(true);
+
+    expect(filteredHeroes.every((hero) => hero.name.toLowerCase().includes('man'))).toBe(true);
   });
 
   it('should filter heroes case-insensitively', () => {
@@ -86,12 +82,14 @@ describe('HeroService', () => {
   it('should not add a hero with same name and realName', () => {
     const existingHero = service.heroes()[0];
 
-    const newHero: CreateHero = createHero({  
+    const newHero: CreateHero = createHero({
       name: existingHero.name,
       realName: existingHero.realName,
     });
 
-    expect(() => service.createHero(newHero)).toThrow('Hero with this name and real name already exists');
+    expect(() => service.createHero(newHero)).toThrow(
+      'Hero with this name and real name already exists',
+    );
   });
 
   it('should update an existing hero', () => {
@@ -106,9 +104,15 @@ describe('HeroService', () => {
   it('should not update a hero if realName and name are the same as another hero', () => {
     const existingHero = service.heroes()[0];
     const anotherHero = service.heroes()[1];
-    const updatedHero: Hero = { ...existingHero, name: anotherHero.name, realName: anotherHero.realName };
+    const updatedHero: Hero = {
+      ...existingHero,
+      name: anotherHero.name,
+      realName: anotherHero.realName,
+    };
 
-    expect(() => service.updateHero(updatedHero)).toThrow('Hero with this name and real name already exists');
+    expect(() => service.updateHero(updatedHero)).toThrow(
+      'Hero with this name and real name already exists',
+    );
   });
 
   it('should throw when updating a non-existing hero', () => {
@@ -116,12 +120,10 @@ describe('HeroService', () => {
 
     const nonExistingHero: Hero = {
       ...existingHero,
-      id: -1
+      id: -1,
     };
 
-    expect(() => service.updateHero(nonExistingHero)).toThrow(
-      'Hero not found',
-    );
+    expect(() => service.updateHero(nonExistingHero)).toThrow('Hero not found');
   });
 
   it('should delete an existing hero', () => {

@@ -1,135 +1,98 @@
 <div class="hero-card-list">
+  @for (hero of visibleHeroes(); track hero.id) {
+    <mat-card class="hero-card">
+      <mat-card-header>
+        @if (hero.icon) {
+          <img mat-card-avatar [alt]="hero.name" [src]="hero.icon" class="hero-icon" />
+        } @else {
+          <div mat-card-avatar class="hero-avatar">
+            {{ hero.name.charAt(0) }}
+          </div>
+        }
 
-    @for (hero of visibleHeroes(); track hero.id) {
-        <mat-card class="hero-card">
-            <mat-card-header>
+        <mat-card-title appUppercase>
+          {{ hero.name }}
+        </mat-card-title>
 
-                @if(hero.icon){
-                    <img mat-card-avatar [src]="hero.icon" class="hero-icon">
-                } @else {
-                    <div mat-card-avatar class="hero-avatar">
-                        {{ hero.name.charAt(0) }}
-                    </div>
-                }
+        <mat-card-subtitle>
+          {{ hero.realName }}
+        </mat-card-subtitle>
 
-                <mat-card-title appUppercase>
-                    {{ hero.name }}
-                </mat-card-title>
+        <div class="franchise-icon">
+          @switch (hero.franchise) {
+            @case ('Marvel Comics') {
+              <img src="assets/franchise/marvel.png" alt="Marvel Comics" class="franchise-logo" />
+            }
 
-                <mat-card-subtitle>
-                    {{ hero.realName }}
-                </mat-card-subtitle>
+            @case ('DC Comics') {
+              <img src="assets/franchise/dc.png" alt="DC Comics" class="franchise-logo" />
+            }
 
-                <div class="franchise-icon">
-                    @switch (hero.franchise) {
-                        @case ('Marvel Comics') {
-                            <img 
-                                src="assets/franchise/marvel.png" 
-                                alt="Marvel Comics"
-                                class="franchise-logo"
-                            >
-                        }
-
-                        @case ('DC Comics') {
-                            <img 
-                                src="assets/franchise/dc.png" 
-                                alt="DC Comics"
-                                class="franchise-logo"
-                            >
-                        }
-
-                        @default {
-                            {{'-'}}
-                        }
-                    }
-                </div>
-                
-            </mat-card-header>
-            <mat-card-content>
-                <hr>
-
-                <div class="content-hero-row">
-                    <h4>Edad: </h4>
-                    <strong>{{hero.age}}</strong>
-                </div>
-
-                <div class="content-hero-row">
-                    <h4>Poderes:</h4>
-                    <div class="super-powers">
-                        @for (superPower of hero.superPowers; track superPower.id) {
-                            <app-super-power-chip 
-                                [superPower]="superPower">
-                            </app-super-power-chip>
-                        }
-                    </div>
-
-                </div>
-
-                <div class="content-hero-row">
-                    <h4>Usa capa: </h4>
-                        @if (hero.wearCape) {
-                            <mat-icon class="boolean-yes">check_circle</mat-icon>
-                        } @else {
-                            <mat-icon class="boolean-no">cancel</mat-icon>
-                        }
-                </div>
-
-                <div class="content-hero-row">
-
-                    <h4>Es de la Tierra: </h4>
-
-                    @if (hero.fromEarth) {
-                        <mat-icon class="boolean-yes">check_circle</mat-icon>
-                    } @else {
-                        <mat-icon class="boolean-no">cancel</mat-icon>
-                    }
-
-                </div>
-
-                <div class="content-hero-row">
-                    <h4>Descripción: </h4>
-                    <span>{{hero.description}}</span>
-                </div>
-
-                <hr>
-            </mat-card-content>
-
-
-            <mat-card-footer>
-                <div class="actions">
-                    <button 
-                        mat-flat-button 
-                        aria-label="Ver héroe"
-                        (click)="view.emit(hero)"
-                    >
-                        Ver
-                    </button>
-                    <button 
-                        mat-flat-button
-                        aria-label="Editar héroe"
-                        (click)="edit.emit(hero)"
-                    >
-                        Editar
-                    </button>
-                    <button 
-                        mat-raised-button
-                        aria-label="Eliminar héroe"
-                        (click)="delete.emit(hero)"
-                    >
-                        Borrar
-                    </button>
-                </div>
-
-            </mat-card-footer>
-        </mat-card>
-    }
-
-    @if (hasMoreHeroes()) {
-        <div
-            #scrollSentinel
-            class="scroll-sentinel">
+            @default {
+              {{ '-' }}
+            }
+          }
         </div>
-    }
+      </mat-card-header>
+      <mat-card-content>
+        <hr />
 
+        <div class="content-hero-row">
+          <h4>Edad:</h4>
+          <strong>{{ hero.age }}</strong>
+        </div>
 
+        <div class="content-hero-row">
+          <h4>Poderes:</h4>
+          <div class="super-powers">
+            @for (superPower of hero.superPowers; track superPower.id) {
+              <app-super-power-chip [superPower]="superPower"> </app-super-power-chip>
+            }
+          </div>
+        </div>
+
+        <div class="content-hero-row">
+          <h4>Usa capa:</h4>
+          @if (hero.wearCape) {
+            <mat-icon class="boolean-yes">check_circle</mat-icon>
+          } @else {
+            <mat-icon class="boolean-no">cancel</mat-icon>
+          }
+        </div>
+
+        <div class="content-hero-row">
+          <h4>Es de la Tierra:</h4>
+
+          @if (hero.fromEarth) {
+            <mat-icon class="boolean-yes">check_circle</mat-icon>
+          } @else {
+            <mat-icon class="boolean-no">cancel</mat-icon>
+          }
+        </div>
+
+        <div class="content-hero-row">
+          <h4>Descripción:</h4>
+          <span>{{ hero.description }}</span>
+        </div>
+
+        <hr />
+      </mat-card-content>
+
+      <mat-card-footer>
+        <div class="actions">
+          <button mat-flat-button aria-label="Ver héroe" (click)="view.emit(hero)">Ver</button>
+          <button mat-flat-button aria-label="Editar héroe" (click)="edit.emit(hero)">
+            Editar
+          </button>
+          <button mat-raised-button aria-label="Eliminar héroe" (click)="delete.emit(hero)">
+            Borrar
+          </button>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  }
+
+  @if (hasMoreHeroes()) {
+    <div #scrollSentinel class="scroll-sentinel"></div>
+  }
 </div>

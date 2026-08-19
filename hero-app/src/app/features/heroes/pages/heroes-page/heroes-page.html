@@ -1,83 +1,64 @@
 <section class="heroes-page">
-    <header class="page-header">
-        <div>
-            <h1><img src="assets/super-hero.png" class="title-icon"> Super Héroes</h1>
-            <p>Administración de la base de datos de super héroes</p>
-        </div>
-
+  <header class="page-header">
+    <div>
+      <h1>
+        <img src="assets/super-hero.png" [alt]="'Super Hero'" class="title-icon" /> Super Héroes
+      </h1>
+      <p>Administración de la base de datos de super héroes</p>
+    </div>
 
     <div class="toolbar">
-        <mat-form-field 
-            appearance="outline" 
-            class="search-field" 
-            subscriptSizing="dynamic"
-        >
-            <mat-icon matPrefix>search</mat-icon>
-            
-            <input 
-                #searchInput
-                matInput 
-                type="search" 
-                [value]="searchTerm()" 
-                (input)="onSearchTermChange($event)" 
-                placeholder="Ingrese el nombre del héroe" 
-            />
+      <mat-form-field appearance="outline" class="search-field" subscriptSizing="dynamic">
+        <mat-icon matPrefix>search</mat-icon>
 
-            @if (searchTerm()) {
-                <button 
-                    mat-icon-button 
-                    matSuffix 
-                    type="button"
-                    aria-label="Clear search"
-                    (click)="searchTerm.set('')"
-                >
-                    <mat-icon>close</mat-icon>
-                </button>
-            }
-
-        </mat-form-field>
-
-        <button
-            mat-flat-button
-            class="add-button"
-            (click)="addHero()"
-        >
-            <mat-icon>add</mat-icon>
-            Agregar héroe
-        </button>
-
-
-    </div>
-
-
-    </header>
-
-
-
-    <div class="desktop-heroes">
-
-        <div class="table-card">
-            <app-hero-table
-                [heroes]="heroes()"
-                [searchValue]="searchTerm()"
-                (view)="viewHero($event)"
-                (edit)="editHero($event)"
-                (delete)="deleteHero($event)"
-            >
-            </app-hero-table>
-
-        </div>
-    </div>
-
-    <div class="mobile-heroes">
-        <app-hero-card-list
-            [heroes]="heroes()"
-            (view)="viewHero($event)"
-            (edit)="editHero($event)"
-            (delete)="deleteHero($event)"
+        <input
+          #searchInput
+          matInput
+          type="search"
+          [value]="searchTerm()"
+          (input)="onSearchTermChange($event)"
+          placeholder="Ingrese el nombre del héroe"
         />
+
+        @if (searchTerm()) {
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            aria-label="Clear search"
+            (click)="searchTerm.set('')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+
+      <button mat-flat-button class="add-button" (click)="addHero()">
+        <mat-icon>add</mat-icon>
+        Agregar héroe
+      </button>
     </div>
+  </header>
 
+  <div class="desktop-heroes">
+    <div class="table-card">
+      <app-hero-table
+        [heroes]="heroes()"
+        [searchValue]="searchTerm()"
+        (view)="viewHero($event)"
+        (edit)="editHero($event)"
+        (delete)="deleteHero($event)"
+      >
+      </app-hero-table>
+    </div>
+  </div>
 
+  <div class="mobile-heroes">
+    <app-hero-card-list
+      [heroes]="heroes()"
+      (view)="viewHero($event)"
+      (edit)="editHero($event)"
+      (delete)="deleteHero($event)"
+    />
+  </div>
 </section>
-

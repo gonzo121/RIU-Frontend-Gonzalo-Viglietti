@@ -1,61 +1,61 @@
 :host {
-    display: block;
-    height: 100dvh;
-    overflow: hidden;
+  display: block;
+  height: 100dvh;
+  overflow: hidden;
 }
 
 .heroes-page {
-    max-width: 1600px;
-    height: 100%;
-    margin: 0 auto;
+  max-width: 1600px;
+  height: 100%;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 24px 32px;
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  .page-header {
+    flex: 0 0 auto;
 
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 
-    padding: 24px 32px;
-    box-sizing: border-box;
+    margin-bottom: 20px;
 
-    overflow: hidden;
+    h1 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
 
-    .page-header {
-        flex: 0 0 auto;
+      .title-icon {
+        height: 50px;
+      }
+    }
+  }
 
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+  .toolbar {
+    flex: 0 0 auto;
 
-        margin-bottom: 20px;
+    gap: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 16px;
 
-        h1 {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-            .title-icon {
-                height: 50px;
-            }
-        }
+    .search-field {
+      width: 40vw;
     }
 
-    .toolbar {
-        flex: 0 0 auto;
-
-        gap: 1rem;
-        margin-top: 2rem;
-        margin-bottom: 16px;
-
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        .search-field {
-            width: 40vw;
-        }
-
-        .add-button {
-            border-radius: 5px;
-        }
+    .add-button {
+      border-radius: 5px;
     }
+  }
 }
 
 /*
@@ -64,25 +64,25 @@
  * disponible debajo del toolbar.
  */
 .desktop-heroes {
-    flex: 1 1 auto;
-    min-height: 0;
+  flex: 1 1 auto;
+  min-height: 0;
 
-    display: flex;
+  display: flex;
 
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .table-card {
-    flex: 1 1 auto;
-    min-height: 0;
-    min-width: 0;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
 
-    display: flex;
+  display: flex;
 
-    overflow: hidden;
+  overflow: hidden;
 
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
 }
 
 /*
@@ -90,73 +90,68 @@
  * pueda ocupar/reducirse dentro del flex.
  */
 app-hero-table {
-    flex: 1 1 auto;
-    min-height: 0;
-    min-width: 0;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
 
-    display: flex;
+  display: flex;
 }
 
 .mobile-heroes {
-    display: none;
+  display: none;
 }
-
 
 /* =========================
    MOBILE
    ========================= */
 
 @media (max-width: 768px) {
-    :host {
-        height: auto;
-        min-height: 100dvh;
-        overflow: visible;
+  :host {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  .heroes-page {
+    height: auto;
+    min-height: 100dvh;
+
+    padding: 12px;
+
+    overflow: visible;
+
+    .page-header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+      top: 0;
+      position: sticky;
+      z-index: 10;
+      background-color: #fff8f8;
     }
 
-    .heroes-page {
-        height: auto;
-        min-height: 100dvh;
+    .toolbar {
+      width: 100%;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      flex-direction: column;
+      align-items: stretch;
 
-        padding: 12px;
+      .search-field {
+        width: 100%;
+      }
 
-        overflow: visible;
-
-        .page-header {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 12px;
-            top: 0;
-            position: sticky;
-            z-index: 10;
-            background-color: #fff8f8;
-        }
-
-        .toolbar {
-            width: 100%;
-            margin-top: 0;
-            margin-bottom: 1rem;
-            flex-direction: column;
-            align-items: stretch;
-
-            .search-field {
-                width: 100%;
-            }
-
-            .add-button {
-                width: 100%;
-            }
-        }
+      .add-button {
+        width: 100%;
+      }
     }
+  }
 
-    .desktop-heroes {
-        display: none;
-    }
+  .desktop-heroes {
+    display: none;
+  }
 
-    .mobile-heroes {
-        display: block;
-    }
-
-
+  .mobile-heroes {
+    display: block;
+  }
 }
-
-

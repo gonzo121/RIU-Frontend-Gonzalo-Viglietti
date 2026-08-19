@@ -2,10 +2,8 @@ import { Directive } from '@angular/core';
 
 @Directive({
   selector: '[appUppercase]',
-  host:{
-    '[style.text-transform]':'"uppercase"'
-  }
+  host: {
+    '[style.text-transform]': '"uppercase"',
+  },
 })
-export class UppercaseDirective {
-  constructor() {}
-}
+export class UppercaseDirective {}

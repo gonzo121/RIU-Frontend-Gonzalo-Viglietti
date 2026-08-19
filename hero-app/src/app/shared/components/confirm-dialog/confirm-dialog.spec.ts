@@ -15,11 +15,11 @@ describe('ConfirmDialog', () => {
       text: 'Si, eliminar',
     },
     cancelText: 'Cancelar',
-  }
+  };
 
   const dialogRefMock = {
     close: jest.fn(),
-  }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -27,11 +27,11 @@ describe('ConfirmDialog', () => {
       providers: [
         {
           provide: MAT_DIALOG_DATA,
-          useValue: mockDialogData
+          useValue: mockDialogData,
         },
         {
           provide: MatDialogRef,
-          useValue: dialogRefMock
+          useValue: dialogRefMock,
         },
       ],
     }).compileComponents();
@@ -44,7 +44,7 @@ describe('ConfirmDialog', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
-  })
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -69,9 +69,11 @@ describe('ConfirmDialog', () => {
   });
 
   it('should display custom confirm icon', () => {
-    const confirmIcon: HTMLElement = fixture.nativeElement.querySelector('.confirm-button mat-icon');
+    const confirmIcon: HTMLElement = fixture.nativeElement.querySelector(
+      '.confirm-button mat-icon',
+    );
 
-    expect(confirmIcon.textContent?.trim()).toBe(mockDialogData.confirm?.icon)
+    expect(confirmIcon.textContent?.trim()).toBe(mockDialogData.confirm?.icon);
   });
 
   it('should display custom cancel text', () => {
@@ -86,25 +88,24 @@ describe('ConfirmDialog', () => {
     cancelButton.click();
 
     expect(dialogRefMock.close).toHaveBeenCalledWith(false);
-  })
+  });
 
   it('should close dialog with true when confirm button is clicked', () => {
-        const confirmButton: HTMLElement = fixture.nativeElement.querySelector('.confirm-button');
+    const confirmButton: HTMLElement = fixture.nativeElement.querySelector('.confirm-button');
 
     confirmButton.click();
 
     expect(dialogRefMock.close).toHaveBeenCalledWith(true);
-
-  })
+  });
 });
 
 describe('ConfirmDialog defaults', () => {
-  let fixture: ComponentFixture<ConfirmDialog>
+  let fixture: ComponentFixture<ConfirmDialog>;
 
   const mockData: ConfirmDialogData = {
     title: 'Confirmacion',
     message: 'Desea continuar?',
-  }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -118,9 +119,9 @@ describe('ConfirmDialog defaults', () => {
           provide: MatDialogRef,
           useValue: {
             close: jest.fn(),
-          }
-        }
-      ]
+          },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ConfirmDialog);
@@ -140,8 +141,10 @@ describe('ConfirmDialog defaults', () => {
   });
 
   it('should display "check" as default confirm icon', () => {
-    const confirmButton: HTMLElement = fixture.nativeElement.querySelector('.confirm-button mat-icon');
+    const confirmButton: HTMLElement = fixture.nativeElement.querySelector(
+      '.confirm-button mat-icon',
+    );
 
     expect(confirmButton.textContent?.trim()).toBe('check');
   });
-})
+});

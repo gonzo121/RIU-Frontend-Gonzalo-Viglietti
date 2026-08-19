@@ -60,7 +60,6 @@ describe('HeroFormPage', () => {
     icon: '',
   };
 
-
   beforeEach(async () => {
     heroServiceMock = {
       getHeroById: jest.fn(),
@@ -106,7 +105,7 @@ describe('HeroFormPage', () => {
           provide: LoadingService,
           useValue: loadingServiceMock,
         },
-      ]
+      ],
     }).compileComponents();
   });
 
@@ -114,7 +113,7 @@ describe('HeroFormPage', () => {
     fixture = TestBed.createComponent(HeroFormPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }
+  };
 
   it('should create', () => {
     createComponent();
@@ -138,7 +137,6 @@ describe('HeroFormPage', () => {
     expect(component['heroId']).toBe(1);
     expect(heroServiceMock.getHeroById).toHaveBeenCalledWith(1);
     expect(component['hero']).toEqual(hero);
-
   });
 
   it('should create hero using loading service', async () => {
@@ -168,7 +166,7 @@ describe('HeroFormPage', () => {
     await component['updateHero'](createHero);
 
     const expectedHero: Hero = {
-      id:1,
+      id: 1,
       ...createHero,
     };
 
@@ -180,7 +178,6 @@ describe('HeroFormPage', () => {
     activatedRouteMock.snapshot.paramMap.get.mockReturnValue('1');
     heroServiceMock.getHeroById.mockReturnValue(hero);
     routerMock.url = '/heroes/1/edit';
-
 
     createComponent();
 
@@ -213,8 +210,7 @@ describe('HeroFormPage', () => {
   it('should create hero when HeroForm emits createRequested', async () => {
     createComponent();
 
-    const heroForm: HeroForm = fixture.debugElement
-      .query(By.directive(HeroForm))
+    const heroForm: HeroForm = fixture.debugElement.query(By.directive(HeroForm))
       .componentInstance as HeroForm;
 
     heroForm.createRequested.emit(createHero);
@@ -242,5 +238,4 @@ describe('HeroFormPage', () => {
     expect(component['isViewMode']()).toBe(false);
     expect(routerMock.navigate).toHaveBeenCalledWith(['/heroes', 1, 'edit']);
   });
-
 });

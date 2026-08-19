@@ -33,14 +33,13 @@ describe('FranchiseChip', () => {
   });
 
   it('should display a chip with - if no franchise name given', () => {
-    fixture.componentRef.setInput('franchise', '')
+    fixture.componentRef.setInput('franchise', '');
 
     fixture.detectChanges();
-    
+
     const span: HTMLElement = fixture.nativeElement.querySelector('.franchise-name');
-    
+
     expect(span).toBeTruthy();
     expect(span.textContent?.trim()).toBe('-');
-  })
-
+  });
 });
