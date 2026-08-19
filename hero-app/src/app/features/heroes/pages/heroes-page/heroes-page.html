@@ -6,7 +6,7 @@
         </div>
 
 
-            <div class="toolbar">
+    <div class="toolbar">
         <mat-form-field 
             appearance="outline" 
             class="search-field" 
@@ -60,9 +60,9 @@
             <app-hero-table
                 [heroes]="heroes()"
                 [searchValue]="searchTerm()"
-                (view)="onView($event)"
-                (edit)="onEdit($event)"
-                (delete)="onDelete($event)"
+                (view)="viewHero($event)"
+                (edit)="editHero($event)"
+                (delete)="deleteHero($event)"
             >
             </app-hero-table>
 
@@ -72,9 +72,9 @@
     <div class="mobile-heroes">
         <app-hero-card-list
             [heroes]="heroes()"
-            (view)="onView($event)"
-            (edit)="onEdit($event)"
-            (delete)="onDelete($event)"
+            (view)="viewHero($event)"
+            (edit)="editHero($event)"
+            (delete)="deleteHero($event)"
         />
     </div>
 

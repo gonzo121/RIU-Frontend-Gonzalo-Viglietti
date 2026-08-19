@@ -1,0 +1,15 @@
+<section class="hero-form-page">
+
+        <app-hero-form
+            [hero]="hero"
+            (cancelRequested)="cancel()"
+            (createRequested)="createHero($event)"
+            (updateRequested)="updateHero($event)"
+            (editRequested)="redirectToEdit($event)"
+            [viewMode]="isViewMode()"
+        >
+        </app-hero-form>
+
+    
+
+</section>

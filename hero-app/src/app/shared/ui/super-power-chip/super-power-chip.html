@@ -2,12 +2,15 @@
     <span>
         <span class="icon-container">
             @if(superPower().icon){
-                <img [src]="superPower().icon" class="super-power-icon">
+                <img 
+                    [src]="superPower().icon" 
+                    [alt]="superPower().name" 
+                    class="super-power-icon"
+                >
             }
         </span>
         <span class="power-name">
             {{superPower().name}}
-
         </span>
 
     </span>

@@ -20,7 +20,7 @@
 
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Heroe </th>
-                <td mat-cell *matCellDef="let hero" appUppercaseDirective> 
+                <td mat-cell *matCellDef="let hero" appUppercase> 
                     {{hero.name}} 
                 </td>
             </ng-container>
@@ -33,34 +33,7 @@
             <ng-container matColumnDef="franchise">
                 <th mat-header-cell *matHeaderCellDef> Franquicia </th>
                 <td mat-cell *matCellDef="let hero"> 
-                    <mat-chip class="franchise-chip">
-                        <span class="franchise-content">
-                            @switch (hero.franchise) {
-                                @case ('Marvel Comics') {
-                                    <img 
-                                        src="assets/franchise/marvel.png" 
-                                        alt="Marvel Comics"
-                                        class="franchise-logo"
-                                    >
-                                }
-
-                                @case ('DC Comics') {
-                                    <img 
-                                        src="assets/franchise/dc.png" 
-                                        alt="DC Comics"
-                                        class="franchise-logo"
-                                    >
-                                }
-
-                                @default {
-                                    {{'-'}}
-                                }
-                            }
-                            <span>
-                                {{hero.franchise}}
-                            </span>
-                        </span>
-                    </mat-chip>
+                    <app-franchise-chip [franchise]="hero.franchise"></app-franchise-chip>
                 </td>
             </ng-container>
 
@@ -114,13 +87,25 @@
                 <th mat-header-cell *matHeaderCellDef> Acciones </th>
                 <td mat-cell *matCellDef="let hero">
                     <div class="actions">
-                        <button mat-icon-button color="accent" (click)="view.emit(hero)">
+                        <button 
+                            mat-icon-button 
+                            aria-label="Ver héroe"
+                            (click)="view.emit(hero)"
+                        >
                             <mat-icon>visibility</mat-icon>
                         </button>
-                        <button mat-icon-button color="primary" (click)="edit.emit(hero)">
+                        <button 
+                            mat-icon-button 
+                            aria-label="Editar héroe" 
+                            (click)="edit.emit(hero)"
+                        >
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-icon-button color="warn" (click)="delete.emit(hero)">
+                        <button 
+                            mat-icon-button 
+                            aria-label="Eliminar héroe"
+                            (click)="delete.emit(hero)"
+                        >
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>

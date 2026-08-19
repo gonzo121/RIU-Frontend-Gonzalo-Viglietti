@@ -63,58 +63,58 @@ export const SUPER_POWERS = {
         icon: 'assets/super-power-icon/lightning.png'
     },
     VIBRANIUM_SUIT: {
-        id: 12,
+        id: 13,
         name: 'Traje de vibranio',
         icon: 'assets/super-power-icon/vibranium.png'
     },
     SUPERHUMAN_DURABILITY: {
-        id: 13,
+        id: 14,
         name: 'Durabilidad sobrehumana',
         icon: 'assets/super-power-icon/durabilidad.png'
     },
     SUPER_SPEED: {
-        id: 14,
+        id: 15,
         name: 'Super velocidad',
         icon: 'assets/super-power-icon/speed.webp'
     },
     TIME_MANIPULATION: {
-        id: 15,
+        id: 16,
         name: 'Manipulación del tiempo',
         icon: 'assets/super-power-icon/time-manipulation.png'
 
     },
     POWER_RING: {
-        id: 16,
+        id: 17,
         name: 'Anillo de poder capaz de crear cosas',
         icon: 'assets/super-power-icon/anillo.webp'
     },
     COMMUNICATE_WITH_MARINE_LIFE: {
-        id: 17,
+        id: 18,
         name: 'Capacidad para comunicarse con la vida marina',
         icon: 'assets/super-power-icon/vida-marina.png'
     },
     MAGIC: {
-        id: 18,
+        id: 19,
         name: 'Magia',
         icon: 'assets/super-power-icon/magic.png'
     },
     TIME_AND_SPACE_MANIPULATION: {
-        id: 19,
+        id: 20,
         name: 'Manipulación del tiempo y del espacio',
         icon: 'assets/super-power-icon/time-manipulation.png'
     },
     MARKSMAN: {
-        id: 20,
+        id: 21,
         name: 'Francotirador',
         icon: 'assets/super-power-icon/marksman.png'
     },
     REGENERATIVE_HEALING_FACTOR: {
-        id: 21,
+        id: 22,
         name: 'Factor de curación regenerativa',
         icon: 'assets/super-power-icon/healing.png'
     },
     ENHANCED_SENSES: {
-        id: 22,
+        id: 23,
         name: 'Sentidos mejorados',
         icon: 'assets/super-power-icon/senses.png'
     }
